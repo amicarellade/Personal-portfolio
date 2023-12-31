@@ -82,7 +82,7 @@ nav a:hover::before{
 
 .shelf {
     display: block;
-    z-index: 9;
+    z-index: 4;
     content: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1996003/basic-wood-wall-shelf-clipart-md.png");
     position: relative;
     width: 500px;
@@ -115,9 +115,27 @@ nav a:hover::before{
     top: 40px;
 }
 
+.plant1 {
+    position: fixed;
+    top: 80px; /* Adjust the vertical position from the bottom */
+    left: 110px; /* Adjust the horizontal position from the right */
+    width: 550px; 
+    height: auto; 
+    z-index: 5; 
+}
+
 #shelf2 { 
     padding-left: 500px;
     top: 25px;
+}
+
+.plant2 {
+    position: fixed;
+    top: 195px; /* Adjust the vertical position from the bottom */
+    right: 275px; /* Adjust the horizontal position from the right */
+    width: 175px; 
+    height: auto; 
+    z-index: 5; 
 }
 
 #shelf3 { 
@@ -142,7 +160,7 @@ nav a:hover::before{
 }
 
 .picture:hover {
-    transform: translateX(-50%) scale(1.1); /* Increase the size on hover */
+    transform: translateX(-50%) scale(1.1); 
 }
 
 .shelf-text {
@@ -165,6 +183,21 @@ nav a:hover::before{
     top: 0;
     left: 0;
 }
+
+.golf-clubs {
+    position: fixed;
+    bottom: -55px; /* Adjust the vertical position from the bottom */
+    right: -260px; /* Adjust the horizontal position from the right */
+    width: 700px; 
+    height: auto; 
+    z-index: 3; 
+    transition: transform 0.3s ease;
+}
+
+.golf-clubs:hover {
+    transform: scale(1.1); 
+}
+
 
 .item {
     background-color: #fff;
