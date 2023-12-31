@@ -91,7 +91,7 @@ nav a:hover::before{
     margin-right: auto;
 }
 
-.stuffonshelf {
+/* .stuffonshelf {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -101,23 +101,23 @@ nav a:hover::before{
     width: 770px;
     margin-left: auto;
     margin-right: auto;
-}
+} */
 
-.example { 
+/* .example { 
     width: 100px;
     height: 100px;
     padding: 5px;
     background-color: magenta;
-}
+} */
 
 #shelf1 { 
     padding-right: 500px;
-    top: 50px;
+    top: 40px;
 }
 
 #shelf2 { 
     padding-left: 500px;
-    top: 15px;
+    top: 25px;
 }
 
 #shelf3 { 
@@ -125,9 +125,24 @@ nav a:hover::before{
     top: 15px;
 }
 
-#shelf4 { 
+/* #shelf4 { 
     padding-left: 500px;
     top: 400px;
+} */
+
+.picture {
+    position: absolute;
+    top: -40px; /* Adjust the vertical position as needed */
+    left: 67%; /* Center the image horizontally */
+    transform: translateX(-50%);
+    width: 500px; /* Adjust the width of the image as needed */
+    height: auto; /* Maintain the image's aspect ratio */
+    z-index: 2; /* Place it above the shelves */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.picture:hover {
+    transform: translateX(-50%) scale(1.1); /* Increase the size on hover */
 }
 
 .shelf-text {
