@@ -3,6 +3,7 @@ body {
     margin: 0;
     font-family: 'Work Sans', sans-serif;
     background-color: #f6eee3; /* Off-white backdrop */
+    overflow: hidden;
 }
 
 .container {
@@ -80,34 +81,53 @@ nav a:hover::before{
 }
 
 .shelf {
-    position: absolute;
-    /* width: 400px; */
-    height: 10px;
-    background-color: #8b4513; /* Wooden shelf color */
+    display: block;
+    z-index: 9;
+    content: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1996003/basic-wood-wall-shelf-clipart-md.png");
+    position: relative;
+    width: 500px;
+    height: 175px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stuffonshelf {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 10;
+    margin-bottom: -80px;
+    width: 770px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.example { 
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    background-color: magenta;
 }
 
 #shelf1 { 
-    top: 13%; 
-    left: 6%; 
-    width: 400px; 
+    padding-right: 500px;
+    top: 50px;
 }
 
 #shelf2 { 
-    top: 25%; 
-    left: 55%; 
-    width: 250px; 
+    padding-left: 500px;
+    top: 15px;
 }
 
 #shelf3 { 
-    top: 40%; 
-    left: 25%; 
-    width: 350px; 
+    padding-right: 500px;
+    top: 15px;
 }
 
 #shelf4 { 
-    top: 55%; 
-    left: 75%; 
-    width: 300px; 
+    padding-left: 500px;
+    top: 400px;
 }
 
 .shelf-text {
@@ -117,6 +137,11 @@ nav a:hover::before{
     color: #333; /* Text color */
     font-size: 45px; /* Adjust the font size as needed */
     /* font-weight: 10; */
+}
+
+.resume{
+    width: 100px;
+    height: auto;
 }
 
 #content {
