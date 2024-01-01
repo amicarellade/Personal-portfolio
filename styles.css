@@ -113,7 +113,7 @@ nav a:hover::before{
 .digital-clock-container {
     position: absolute;
     bottom: 42%; /* Adjust the vertical position on the shelf */
-    left: 27%;
+    left: 28%;
     transform: translateX(-50%);
     z-index: 6; /* Place it above the shelves */
 }
@@ -172,6 +172,16 @@ nav a:hover::before{
     z-index: 5; 
 }
 
+.headphones {
+    position: fixed;
+    top: 230px; /* Adjust the vertical position from the bottom */
+    right: 350px; /* Adjust the horizontal position from the right */
+    width: 350px; 
+    height: auto; 
+    z-index: 6; 
+    transform: rotate(90deg);
+}
+
 #shelf3 { 
     padding-right: 500px;
     top: 15px;
@@ -190,6 +200,21 @@ nav a:hover::before{
 .books:hover {
     transform: scale(1.1); 
 }
+
+.resume {
+    position: fixed;
+    bottom: 115px; /* Adjust the vertical position from the bottom */
+    right: 320px; /* Adjust the horizontal position from the right */
+    width: 300px; 
+    height: auto; 
+    z-index: 7; 
+    transition: transform 0.3s ease; 
+}
+
+.resume:hover {
+    transform: scale(1.1); 
+}
+
 /* #shelf4 { 
     padding-left: 500px;
     top: 400px;
@@ -217,11 +242,6 @@ nav a:hover::before{
     color: #333; /* Text color */
     font-size: 45px; /* Adjust the font size as needed */
     /* font-weight: 10; */
-}
-
-.resume{
-    width: 100px;
-    height: auto;
 }
 
 #content {
