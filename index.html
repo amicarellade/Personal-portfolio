@@ -13,18 +13,14 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#">How to</a></li>
+                    <li><a href="#" onclick="openPopup()">How to</a></li>
                     <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
     <div id="room">
-        <!-- <div class="stuffonshelf">
-            <div class="example">heehee</div> 
-            <div class="example">hoohoo</div>
-            <div class="example">haha</div>
-        </div> -->
         <div class="digital-clock-container">
             <div class="clock-case">
                 <div class="digital-clock" id="digitalClock"></div>
@@ -44,7 +40,7 @@
         <a href="" target="_blank">
             <img src="Books.png" alt="books" class="books">
         </a>
-        <a href="">
+        <a href="resume.html">
             <img src="Resume-2.png" alt="resume" class="resume">
         </a>
         <img class="shelf" id="shelf3">
@@ -53,6 +49,19 @@
         <a href="#" target="_blank">
             <img src="golfclubs.png" alt="Golf Clubs" class="golf-clubs">
         </a>
+    </div>
+
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <h2>Welcome to my personal website!</h2>
+            <p>You need to explore my shelves to find out more about me!
+                <br> Use your mouse to hover over the elements throughout the room.  
+                <br> If they move, click and find out what information they have.
+                <br> 
+                <br> Enjoy!
+            </p>
+            <button onclick="closePopup()">Close</button>
+        </div>
     </div>
 
     <div class="social-icons">

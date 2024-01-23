@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: 'Work Sans', sans-serif;
     background-color: #f6eee3; /* Off-white backdrop */
-    overflow: hidden;
+    /* overflow: hidden;  */
 }
 
 .container {
@@ -91,29 +91,10 @@ nav a:hover::before{
     margin-right: auto;
 }
 
-/* .stuffonshelf {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    position: relative;
-    z-index: 10;
-    margin-bottom: -80px;
-    width: 770px;
-    margin-left: auto;
-    margin-right: auto;
-} */
-
-/* .example { 
-    width: 100px;
-    height: 100px;
-    padding: 5px;
-    background-color: magenta;
-} */
-
 .digital-clock-container {
     position: absolute;
-    bottom: 42%; /* Adjust the vertical position on the shelf */
-    left: 28%;
+    bottom: 380px;
+    left: 30%;
     transform: translateX(-50%);
     z-index: 6; /* Place it above the shelves */
 }
@@ -149,10 +130,11 @@ nav a:hover::before{
     top: 40px;
 }
 
+/* knitted pot */
 .plant1 {
     position: fixed;
     top: 80px; /* Adjust the vertical position from the bottom */
-    left: 110px; /* Adjust the horizontal position from the right */
+    left: 150px; 
     width: 550px; 
     height: auto; 
     z-index: 5; 
@@ -163,10 +145,11 @@ nav a:hover::before{
     top: 25px;
 }
 
+/* Steel pot */
 .plant2 {
     position: fixed;
     top: 195px; /* Adjust the vertical position from the bottom */
-    right: 275px; /* Adjust the horizontal position from the right */
+    right: 350px; 
     width: 175px; 
     height: auto; 
     z-index: 5; 
@@ -175,7 +158,7 @@ nav a:hover::before{
 .headphones {
     position: fixed;
     top: 230px; /* Adjust the vertical position from the bottom */
-    right: 350px; /* Adjust the horizontal position from the right */
+    right: 450px; 
     width: 350px; 
     height: auto; 
     z-index: 6; 
@@ -189,8 +172,8 @@ nav a:hover::before{
 
 .books {
     position: fixed;
-    bottom: 150px; /* Adjust the vertical position from the bottom */
-    left: 375px; /* Adjust the horizontal position from the right */
+    bottom: 230px; /* Adjust the vertical position from the bottom */
+    left: 450px; 
     width: 300px; 
     height: auto; 
     z-index: 5; 
@@ -203,8 +186,8 @@ nav a:hover::before{
 
 .resume {
     position: fixed;
-    bottom: 115px; /* Adjust the vertical position from the bottom */
-    right: 320px; /* Adjust the horizontal position from the right */
+    bottom: 150px; /* Adjust the vertical position from the bottom */
+    right: 400px; /* Adjust the horizontal position from the right */
     width: 300px; 
     height: auto; 
     z-index: 7; 
@@ -265,6 +248,26 @@ nav a:hover::before{
     transform: scale(1.1); 
 }
 
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+}
 
 .item {
     background-color: #fff;
@@ -275,12 +278,25 @@ nav a:hover::before{
     max-width: 300px;
 }
 
+section {
+    padding: 30px;
+    background-color: #fff;
+    margin: 20px 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
 .social-icons {
-    position: fixed;
-    bottom: 20px;
-    left: 50%; /* Center the icons horizontally */
-    transform: translateX(-50%);
     display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #f6eee3; /* Add background color for visual separation */
+    padding: 10px; /* Add padding for better aesthetics */
 }
 
 .social-icons a {
