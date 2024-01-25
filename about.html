@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <title>Dante Amicarella - About Me</title>
+</head>
+<body>
+    <header>
+        <div class = "container">
+            <img src="logo.png" alt="logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#" onclick="openPopup()">How to</a></li>
+                    <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <h2>Welcome to my personal website!</h2>
+            <p>You need to explore my shelves to find out more about me!
+                <br> Use your mouse to hover over the elements throughout the room.  
+                <br> If they move, click and find out what information they have.
+                <br> 
+                <br> Enjoy!
+            </p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <div class="about-me">
+        <h1>About Me</h1>
+        <p>When I'm not immersed in coding or tackling data science projects, you'll often find me embracing the great outdoors. Whether it's carving       through fresh powder on the ski slopes, navigating scenic hiking trails, perfecting my swing on the golf course, or hitting a trail for a run, I relish every opportunity to connect with nature. I love to explore and visit new places when I am given the opportunity. I've been a football fan since I can remember and have always supported Manchester United through the thick and the thin (the last decade). In recent times, I've cultivated a strong passion for reading, steadily expanding my digital library. The thrill of trying new things is something I cherish, and my latest venture involves experimenting with the art of baking.
+        </p>
+    </div>
+    
+    <div class="frame">
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide"><img src="AboutImages/Skydiving.JPG"></div>
+                <div class="swiper-slide"><img src="AboutImages/BFun.JPG"></div>
+                <div class="swiper-slide"><img src="AboutImages/London.JPG"></div>
+                <div class="swiper-slide"><img src="AboutImages/QMuseum.JPG"></div>
+                <div class="swiper-slide"><img src="AboutImages/NewZealand.JPG"></div>
+                <div class="swiper-slide"><img src="AboutImages/River.JPG"></div>
+                <div class="swiper-slide"><img src="AboutImages/Focaccia.JPG"></div>
+                <div class="swiper-slide"><img src="AboutImages/Bread.JPG"></div>
+
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+          
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          
+        </div>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://twitter.com/datamicarella" target="_blank">
+            <img src="twitter-icon.png" alt="Twitter" class="Twitter">
+        </a>
+        <a href="https://www.instagram.com/danteamicarella/" target="_blank">
+            <img src="instagram-icon.png" alt="Instagram" class="Instagram">
+        </a>
+        <a href="https://github.com/amicarellade" target="_blank">
+            <img src="github-icon.png" alt="GitHub" class="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
+            <img src="linkedin-icon.png" alt="LinkedIn" class="LinkedIn">
+        </a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- https://www.youtube.com/watch?v=6yqywmAkSoM Book reqs -->
+<!-- https://www.cssscript.com/animated-virtual-bookshelf/ virtual bookshelf -->
+<!-- https://medium.com/swlh/how-to-create-your-first-login-page-with-html-css-and-javascript-602dd71144f1 login page -->
+<!-- https://www.youtube.com/watch?v=AF6vGYIyV8M pop up for how to -->

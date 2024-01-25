@@ -9,6 +9,7 @@ body {
 .container {
     width: 80%;
     margin: 0 auto;
+    /* padding: 10px;  */
 }
 
 header {
@@ -132,9 +133,9 @@ nav a:hover::before{
 
 /* knitted pot */
 .plant1 {
-    position: fixed;
-    top: 80px; /* Adjust the vertical position from the bottom */
-    left: 150px; 
+    position: absolute;
+    top: -30px; 
+    left: 125px; 
     width: 550px; 
     height: auto; 
     z-index: 5; 
@@ -185,8 +186,8 @@ nav a:hover::before{
 }
 
 .resume {
-    position: fixed;
-    bottom: 150px; /* Adjust the vertical position from the bottom */
+    position: absolute;
+    bottom: 250px; /* Adjust the vertical position from the bottom */
     right: 400px; /* Adjust the horizontal position from the right */
     width: 300px; 
     height: auto; 
@@ -291,12 +292,42 @@ h1 {
     text-align: center;
 }
 
+.about-me {
+    max-width: 1000px; /* Adjust the maximum width as needed */
+    margin: 0 auto;
+    text-align: justify; /* Justify text for a clean look */
+    font-size: 1.2em; /* Adjust the font size for readability */
+    line-height: 1.6; /* Adjust line height for better spacing */
+    color: #333; /* Text color */
+}
+
+.frame {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+    /* margin: 0 auto; */
+}
+
+.swiper {
+    width: 60%;
+    height: 80vh;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .social-icons {
     display: flex;
     justify-content: center;
     margin-top: 20px;
     background-color: #f6eee3; /* Add background color for visual separation */
-    padding: 10px; /* Add padding for better aesthetics */
+    padding: 10px; 
 }
 
 .social-icons a {
