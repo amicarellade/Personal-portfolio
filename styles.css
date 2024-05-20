@@ -2,18 +2,22 @@
 body { 
     margin: 0;
     font-family: 'Work Sans', sans-serif;
-    background-color: #f6eee3; /* Off-white backdrop */
-    /* overflow: hidden;  */
+    background-color: #f6eee3;
 }
 
 .container {
     width: 80%;
+    max-width: 1200px;
     margin: 0 auto;
     /* padding: 10px;  */
 }
 
 header {
     background: darkolivegreen;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 header::after {
@@ -25,7 +29,7 @@ header::after {
 .logo {
     width: 100px;
     height: 100px;
-    padding: auto 0;
+    /* padding: auto 0; */
 }
 
 nav {
@@ -40,9 +44,8 @@ nav ul{
 
 nav li{
     display: inline-block;
-    margin-left: 90px;
-    padding-top: 40px;
-
+    margin-left: 5vw;
+    padding-top: 5vh;
     position: relative;
 }
 
@@ -62,11 +65,9 @@ nav a::before{
     height: 5px;
     width: 100%;
     background-color: #333;
-
     position: absolute;
     top: 0;
     width: 0%;
-
     transition: all ease-in-out 250ms;
 }
 
@@ -82,120 +83,110 @@ nav a:hover::before{
 }
 
 .shelf {
-    display: block;
-    z-index: 4;
+    /* display: block; */
+    z-index: 3;
     content: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1996003/basic-wood-wall-shelf-clipart-md.png");
     position: relative;
-    width: 50px;
-    height: 150px;
-    margin: 0 auto;
+    max-width: 500px;
+    height: auto;
+    width: 80%;
+    margin: 10px auto;
 }
 
-.digital-clock-container {
+#shelf1, #shelf2, #shelf3 {
     position: absolute;
-    bottom: 380px;
-    left: 30%;
-    transform: translateX(-50%);
-    z-index: 6; /* Place it above the shelves */
-}
-
-.clock-case {
-    position: relative;
-    background-color: #d4c8ba; /* Case color */
-    border-radius: 15px;
-    padding: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
-}
-
-.clock-case::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    border-radius: 15px;
-    background-color: #cc5500;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle 3D effect */
-    z-index: -1;
-}
-
-.digital-clock {
-    font-size: 2em;
-    color: #333; /* Text color */
 }
 
 #shelf1 { 
-    position: relative;
-    padding-right: 500px;
-    top: 40px;
-}
-
-/* knitted pot */
-.plant1 {
-    position: absolute;
-    top: -30px; 
-    left: 125px; 
-    width: 550px; 
-    height: auto; 
-    z-index: 5; 
-    margin-left: auto;
-    margin-right: auto;
+    left: 15%;
+    top: 18%;
 }
 
 #shelf2 { 
-    position: relative;
-    padding-left: 500px;
-    top: 20px;
-}
-
-/* Steel pot */
-.plant2 {
-    position: relative;
-    top: 195px; /* Adjust the vertical position from the bottom */
-    right: 350px; 
-    width: 175px; 
-    height: auto; 
-    z-index: 5; 
-}
-
-.headphones {
-    position: relative;
-    top: 230px; /* Adjust the vertical position from the bottom */
-    right: 450px; 
-    width: 350px; 
-    height: auto; 
-    z-index: 6; 
-    transform: rotate(90deg);
+    right: 15%;
+    top: 30%;
 }
 
 #shelf3 { 
-    position: relative;
-    padding-right: 500px;
-    top: 15px;
+    left: 15%;
+    top: 50%;
+}
+
+/* Items on shelves */
+.plant1, .headphones, .plant2, .books, .digital-clock-container, .resume, .picture, .golf-clubs {
+    width: auto;
+    height: auto;
+    position: absolute;
+    z-index: 10;
+    max-width: 100%;
+}
+
+.plant1 {
+    left: 15%; 
+    top: 10%;
+    width: 40%; 
+}
+
+.headphones {
+    top: 10%; 
+    left: 15%; 
+    width: 25%; 
+    transform: rotate(90deg);
+}
+
+.plant2 {
+    right: 20%;
+    top: 16%;
+    width: 13%; 
 }
 
 .books {
-    position: relative;
-    bottom: 230px; /* Adjust the vertical position from the bottom */
-    left: 450px; 
-    width: 300px; 
-    height: auto; 
-    z-index: 5; 
-    transition: transform 0.3s ease; /* Add a smooth transition effect */
+    top: 38%; 
+    left: 15%; 
+    width: 25%;
+    transition: transform 0.3s ease; 
 }
 
 .books:hover {
     transform: scale(1.1); 
 }
 
-.resume {
+.digital-clock-container {
+    top: 50%;
+    left: 37%;
+    transform: translateX(-50%);
+    z-index: 6; 
+}
+
+.clock-case {
+    background-color: #d4c8ba; 
+    border-radius: 15px;
+    padding: 1vw;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.clock-case::before {
+    content: '';
     position: absolute;
-    bottom: 250px; /* Adjust the vertical position from the bottom */
-    right: 400px; /* Adjust the horizontal position from the right */
-    width: 300px; 
-    height: auto; 
-    z-index: 7; 
+    top: -0.5vw;
+    left: -0.5vw;
+    right: -0.5vw;
+    bottom: -0.5vw;
+    border-radius: 15px;
+    background-color: #cc5500;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    z-index: -1;
+}
+
+.digital-clock {
+    font-size: 2em;
+    color: #333; 
+}
+
+.resume {
+    top: 50%;
+    left: 60%; 
+    width: 20%; 
     transition: transform 0.3s ease; 
 }
 
@@ -203,54 +194,29 @@ nav a:hover::before{
     transform: scale(1.1); 
 }
 
-/* #shelf4 { 
-    padding-left: 500px;
-    top: 400px;
-} */
-
 .picture {
-    position: absolute;
-    top: -40px; /* Adjust the vertical position as needed */
-    left: 67%; /* Center the image horizontally */
+    top: -1vw;
+    left: 68%; 
     transform: translateX(-50%);
-    width: 500px; /* Adjust the width of the image as needed */
-    height: auto; /* Maintain the image's aspect ratio */
-    z-index: 2; /* Place it above the shelves */
-    transition: transform 0.3s ease; /* Add a smooth transition effect */
+    width: 35%; 
+    transition: transform 0.3s ease; 
 }
 
 .picture:hover {
     transform: translateX(-50%) scale(1.1); 
 }
 
-.shelf-text {
-    position: absolute;
-    top: 1px; 
-    left: 7%; /* Adjust the left position to match the corresponding shelf */
-    color: #333; /* Text color */
-    font-size: 45px; /* Adjust the font size as needed */
-    /* font-weight: 10; */
-}
-
-#content {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-
 .golf-clubs {
-    position: fixed;
-    bottom: -55px; /* Adjust the vertical position from the bottom */
-    right: -260px; /* Adjust the horizontal position from the right */
-    width: 700px; 
-    height: auto; 
-    z-index: 3; 
+    bottom: -3vw; 
+    left: -15vw; 
+    width: 40vw; 
+    height: auto;
     transition: transform 0.3s ease;
+    pointer-events: all;
 }
 
 .golf-clubs:hover {
-    transform: scale(1.1); 
+    transform: scale(1.05); 
 }
 
 .popup-overlay {
@@ -297,12 +263,12 @@ h1 {
 }
 
 .about-me {
-    max-width: 1000px; /* Adjust the maximum width as needed */
+    max-width: 1000px;
     margin: 0 auto;
-    text-align: justify; /* Justify text for a clean look */
-    font-size: 1.2em; /* Adjust the font size for readability */
-    line-height: 1.6; /* Adjust line height for better spacing */
-    color: #333; /* Text color */
+    text-align: justify;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
 }
 
 .frame {
@@ -312,7 +278,6 @@ h1 {
     align-items: center;
     justify-content: center;
     padding-top: 5px;
-    /* margin: 0 auto; */
 }
 
 .swiper {
@@ -330,22 +295,88 @@ h1 {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    background-color: #f6eee3; /* Add background color for visual separation */
+    background-color: #f6eee3;
     padding: 10px; 
 }
 
 .social-icons a {
-    margin-right: 50px; 
+    margin-right: 5vw; 
     text-decoration: none;
 }
 
 .social-icons img {
-    width: 50px; 
-    height: 50px; 
+    width: 3vw; 
+    height: auto; 
+    margin-left: 2vw;
     transition: transform 0.3s ease; 
 }
 
 .social-icons img:hover {
-    transform: scale(1.1); /* Slightly increase size on hover */
+    transform: scale(1.1); 
+}
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 767px) {
+    .shelf {
+        width: 90%;
+    }
+
+    .picture,
+    .resume {
+        position: static;
+        transform: none;
+        margin: 0 auto;
+    }
+
+    .picture {
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .resume {
+        width: 70%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .golf-clubs {
+        position: static;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+/* For screens between 768px and 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .shelf {
+        width: 80%;
+    }
+
+    .picture,
+    .resume {
+        position: absolute;
+    }
+
+    .picture {
+        top: 5%;
+        left: 70%;
+        width: 25%;
+        transform: translateX(-50%);
+    }
+
+    .resume {
+        top: 50%;
+        left: 70%;
+        width: 25%;
+        transform: translate(-50%, -50%);
+    }
+
+    .golf-clubs {
+        bottom: -2vw;
+        left: -12vw;
+        width: 30vw;
+    }
 }
 
