@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="library.css" />
+    <title>Dante Amicarella - Library</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <img src="images/logo.png" alt="logo" class="logo" />
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" onclick="openPopup()">How to</a></li>
+            <li>
+              <a href="mailto:dante.amicarella@gmail.com" class="Contact"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="popup-overlay" id="popup">
+      <div class="popup-content">
+        <h2>Welcome to my personal website!</h2>
+        <p>
+          You need to explore my shelves to find out more about me! <br />
+          Use your mouse to hover over the elements throughout the room. <br />
+          If they move, click and find out what information they have.
+          <br />
+          <br />
+          Enjoy!
+        </p>
+        <button onclick="closePopup()">Close</button>
+      </div>
+    </div>
+
+    <section class="library-section">
+      <h1>My Library</h1>
+      <div class="library-container">
+        <div class="book-list">
+          <h2>Books I've Read</h2>
+          <ul id="read-books">
+            <!-- List of books you've read will be added here -->
+          </ul>
+        </div>
+        <div class="book-list">
+          <h2>Books I'm Reading (as of 05/22)</h2>
+          <ul id="reading-books">
+            <!-- List of books you're reading will be added here -->
+          </ul>
+        </div>
+        <div class="book-recommend">
+          <h2>Recommend a Book</h2>
+          <form id="recommendation-form">
+            <label for="book-title">Book Title:</label>
+            <input type="text" id="book-title" name="book-title" required />
+            <label for="book-author">Author:</label>
+            <input type="text" id="book-author" name="book-author" required />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="recommendation-section">
+      <h1>Recommended Books</h1>
+      <ul id="recommended-books">
+        <!-- List of recommended books will be added here -->
+      </ul>
+    </section>
+
+    <div class="social-icons">
+      <a href="https://twitter.com/datamicarella" target="_blank">
+        <img src="images/twitter-icon.png" alt="Twitter" class="Twitter" />
+      </a>
+      <a href="https://www.instagram.com/danteamicarella/" target="_blank">
+        <img
+          src="images/instagram-icon.png"
+          alt="Instagram"
+          class="Instagram"
+        />
+      </a>
+      <a href="https://github.com/amicarellade" target="_blank">
+        <img src="images/github-icon.png" alt="GitHub" class="GitHub" />
+      </a>
+      <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
+        <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn" />
+      </a>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const readBooks = [
+          "To Kill a Mockingbird by Harper Lee",
+          "1984 by George Orwell",
+          "The Great Gatsby by F. Scott Fitzgerald",
+        ];
+
+        const readingBooks = [
+          "The Catcher in the Rye by J.D. Salinger",
+          "Brave New World by Aldous Huxley",
+        ];
+
+        function populateBookList(listId, books) {
+          const ul = document.getElementById(listId);
+          ul.innerHTML = "";
+          books.forEach((book) => {
+            const li = document.createElement("li");
+            li.textContent = book;
+            ul.appendChild(li);
+          });
+        }
+
+        function loadRecommendedBooks() {
+          const recommendedBooks =
+            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+          populateBookList("recommended-books", recommendedBooks);
+        }
+
+        function saveRecommendedBook(book) {
+          const recommendedBooks =
+            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+          recommendedBooks.push(book);
+          localStorage.setItem(
+            "recommendedBooks",
+            JSON.stringify(recommendedBooks)
+          );
+        }
+
+        
+
+        populateBookList("read-books", readBooks);
+        populateBookList("reading-books", readingBooks);
+        loadRecommendedBooks();
+
+        document
+          .getElementById("recommendation-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+            const title = document.getElementById("book-title").value;
+            const author = document.getElementById("book-author").value;
+            if (title && author) {
+              const book = `${title} by ${author}`;
+              saveRecommendedBook(book);
+              const li = document.createElement("li");
+              li.textContent = book;
+              document.getElementById("recommended-books").appendChild(li);
+              document.getElementById("recommendation-form").reset();
+            }
+          });
+      });
+
+      function openPopup() {
+        document.getElementById("popup").style.display = "flex";
+      }
+
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+.library-section {
+    padding: 30px;
+    background-color: #fff;
+    margin: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.library-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.book-list {
+    flex: 1;
+    margin: 10px;
+}
+
+.book-list h2 {
+    text-align: center;
+}
+
+.book-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.book-list li {
+    padding: 5px 0;
+    text-align: center;
+}
+
+.book-recommend {
+    flex: 1;
+    margin: 10px;
+}
+
+.book-recommend h2 {
+    text-align: center;
+}
+
+.book-recommend form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-recommend form label {
+    margin: 5px 0;
+}
+
+.book-recommend form input {
+    margin: 5px 0;
+    padding: 5px;
+    width: 80%;
+    max-width: 300px;
+}
+
+.book-recommend form button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: darkolivegreen;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.book-recommend form button:hover {
+    background-color: #333;
+}
+
+.recommendation-section {
+    padding: 30px;
+    background-color: #fff;
+    margin: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendation-section li {
+    padding: 5px 0;
+    text-align: center;
+}
+
+.recommendation-section h1 {
+    text-align: center;
+}
