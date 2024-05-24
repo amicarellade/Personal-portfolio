@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="library.css" />
     <title>Dante Amicarella - Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -24,6 +25,7 @@
         </nav>
       </div>
     </header>
+
     <div class="popup-overlay" id="popup">
       <div class="popup-content">
         <h2>Welcome to my personal website!</h2>
@@ -31,48 +33,50 @@
           You need to explore my shelves to find out more about me! <br />
           Use your mouse to hover over the elements throughout the room. <br />
           If they move, click and find out what information they have.
-          <br />
-          <br />
+          <br /><br />
           Enjoy!
         </p>
         <button onclick="closePopup()">Close</button>
       </div>
     </div>
-
-    <section class="library-section">
-      <h1>My Library</h1>
-      <div class="library-container">
-        <div class="book-list">
-          <h2>Books I've Read</h2>
-          <ul id="read-books">
-            <!-- List of books you've read will be added here -->
-          </ul>
-        </div>
-        <div class="book-list">
-          <h2>Books I'm Reading (as of 05/22)</h2>
-          <ul id="reading-books">
-            <!-- List of books you're reading will be added here -->
-          </ul>
-        </div>
-        <div class="book-recommend">
-          <h2>Recommend a Book</h2>
-          <form id="recommendation-form">
-            <label for="book-title">Book Title:</label>
-            <input type="text" id="book-title" name="book-title" required />
-            <label for="book-author">Author:</label>
-            <input type="text" id="book-author" name="book-author" required />
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section class="recommendation-section">
-      <h1>Recommended Books</h1>
-      <ul id="recommended-books">
-        <!-- List of recommended books will be added here -->
+    <!-- Book Recommendation Form -->
+    <div class="recommendation-section">
+      <h2>Recommend a Book</h2>
+      <form id="recommendation-form">
+        <input
+          type="text"
+          id="book-title"
+          placeholder="Enter book title"
+          required
+        />
+        <button type="submit">Add Book</button>
+      </form>
+      <ul id="book-recommendations">
+        <!-- Book recommendations will be added here -->
       </ul>
-    </section>
+    </div>
+    <div class="book-list">
+      <h2 id="reading-books-title">
+        Books I'm Reading (as of <span id="current-date"></span>)
+      </h2>
+      <ul id="reading-books">
+        <li>The Great Gatsby by F. Scott Fitzgerald</li>
+        <li>To Kill a Mockingbird by Harper Lee</li>
+        <li>1984 by George Orwell</li>
+        <!-- Add more books here -->
+      </ul>
+    </div>
+
+    <!-- Books I've Read Section -->
+    <div class="book-list">
+      <h2>Books I've Read</h2>
+      <ul id="read-books">
+        <li>Pride and Prejudice by Jane Austen</li>
+        <li>Moby Dick by Herman Melville</li>
+        <li>War and Peace by Leo Tolstoy</li>
+        <!-- Add more books here -->
+      </ul>
+    </div>
 
     <div class="social-icons">
       <a href="https://twitter.com/datamicarella" target="_blank">
@@ -95,73 +99,109 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const readBooks = [
-          "To Kill a Mockingbird by Harper Lee",
-          "1984 by George Orwell",
-          "The Great Gatsby by F. Scott Fitzgerald",
-        ];
+        // Function to update the reading books title with the current date
+        function updateReadingBooksTitle() {
+          const dateElement = document.getElementById("current-date");
+          const currentDate = new Date();
+          const options = { month: "long", day: "numeric" };
+          const formattedDate = currentDate.toLocaleDateString(
+            undefined,
+            options
+          );
+          dateElement.textContent = formattedDate;
+        }
 
-        const readingBooks = [
-          "The Catcher in the Rye by J.D. Salinger",
-          "Brave New World by Aldous Huxley",
-        ];
+        updateReadingBooksTitle();
 
-        function populateBookList(listId, books) {
-          const ul = document.getElementById(listId);
-          ul.innerHTML = "";
-          books.forEach((book) => {
-            const li = document.createElement("li");
-            li.textContent = book;
-            ul.appendChild(li);
+        // Function to add a book recommendation to the list and local storage
+        function addBookRecommendation(bookTitle) {
+          const recommendationList = document.getElementById(
+            "book-recommendations"
+          );
+          const newBookItem = document.createElement("li");
+          newBookItem.textContent = bookTitle;
+
+          const removeButton = document.createElement("button");
+          removeButton.textContent = "Remove";
+          removeButton.className = "remove-button";
+          removeButton.addEventListener("click", function () {
+            if (prompt("Enter password to remove book:") === "yourPassword") {
+              recommendationList.removeChild(newBookItem);
+              // Update local storage
+              const savedBooks =
+                JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+              const updatedBooks = savedBooks.filter(
+                (book) => book !== bookTitle
+              );
+              localStorage.setItem(
+                "recommendedBooks",
+                JSON.stringify(updatedBooks)
+              );
+            } else {
+              alert("Incorrect password.");
+            }
+          });
+
+          newBookItem.appendChild(removeButton);
+          recommendationList.appendChild(newBookItem);
+
+          // Save to local storage
+          const savedBooks =
+            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+          savedBooks.push(bookTitle);
+          localStorage.setItem("recommendedBooks", JSON.stringify(savedBooks));
+        }
+
+        // Function to load book recommendations from local storage
+        function loadBookRecommendations() {
+          const savedBooks =
+            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+          const recommendationList = document.getElementById(
+            "book-recommendations"
+          );
+          savedBooks.forEach((bookTitle) => {
+            const newBookItem = document.createElement("li");
+            newBookItem.textContent = bookTitle;
+
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.className = "remove-button";
+            removeButton.addEventListener("click", function () {
+              if (prompt("Enter password to remove book:") === "123") {
+                recommendationList.removeChild(newBookItem);
+                // Update local storage
+                const updatedBooks = savedBooks.filter(
+                  (book) => book !== bookTitle
+                );
+                localStorage.setItem(
+                  "recommendedBooks",
+                  JSON.stringify(updatedBooks)
+                );
+              } else {
+                alert("Incorrect password.");
+              }
+            });
+
+            newBookItem.appendChild(removeButton);
+            recommendationList.appendChild(newBookItem);
           });
         }
 
-        function loadRecommendedBooks() {
-          const recommendedBooks =
-            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-          populateBookList("recommended-books", recommendedBooks);
-        }
+        loadBookRecommendations();
 
-        function saveRecommendedBook(book) {
-          const recommendedBooks =
-            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-          recommendedBooks.push(book);
-          localStorage.setItem(
-            "recommendedBooks",
-            JSON.stringify(recommendedBooks)
-          );
-        }
-
-        
-
-        populateBookList("read-books", readBooks);
-        populateBookList("reading-books", readingBooks);
-        loadRecommendedBooks();
-
+        // Event listener for the book recommendation form
         document
           .getElementById("recommendation-form")
           .addEventListener("submit", function (event) {
             event.preventDefault();
-            const title = document.getElementById("book-title").value;
-            const author = document.getElementById("book-author").value;
-            if (title && author) {
-              const book = `${title} by ${author}`;
-              saveRecommendedBook(book);
-              const li = document.createElement("li");
-              li.textContent = book;
-              document.getElementById("recommended-books").appendChild(li);
-              document.getElementById("recommendation-form").reset();
+            const bookTitleInput = document.getElementById("book-title");
+            const bookTitle = bookTitleInput.value.trim();
+            if (bookTitle) {
+              addBookRecommendation(bookTitle);
+              bookTitleInput.value = "";
             }
           });
       });
-
-      function openPopup() {
-        document.getElementById("popup").style.display = "flex";
-      }
-
-      function closePopup() {
-        document.getElementById("popup").style.display = "none";
-      }
     </script>
   </body>
 </html>
