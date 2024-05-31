@@ -69,11 +69,25 @@
         </a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js">
+        const swiper = new Swiper('.swiper', {
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+
+            loop: true,
+            
+            pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            },
+
+            navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 </body>
 </html>
-
-<!-- https://www.youtube.com/watch?v=6yqywmAkSoM Book reqs -->
-<!-- https://www.cssscript.com/animated-virtual-bookshelf/ virtual bookshelf -->
-<!-- https://medium.com/swlh/how-to-create-your-first-login-page-with-html-css-and-javascript-602dd71144f1 login page -->
-<!-- https://www.youtube.com/watch?v=AF6vGYIyV8M pop up for how to -->

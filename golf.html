@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="golf.css">
+    <title>Dante Amicarella - Strokes Gained</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img src="images/logo.png" alt="logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Golf Strokes Gained Calculator</h1>
+        <div id="holesContainer">
+          <div class="hole" id="hole1">
+            <h3>Hole 1</h3>
+            <div class="form-group">
+              <label for="holePar1">Par:</label>
+              <input type="number" class="form-control holePar" id="holePar1" min="3" max="5" data-hole="1">
+            </div>
+            <div class="form-group">
+              <label for="numOfShots1">Number of Shots:</label>
+              <input type="number" class="form-control numOfShots" id="numOfShots1" min="1" max="10" data-hole="1">
+            </div>
+            <div id="inputContainer1"></div>
+            <button class="btn btn-danger removeHoleButton" data-hole="1">Remove Hole</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="addHoleButton">Add Hole</button>
+        <button class="btn btn-success" id="calculateButton">Calculate Strokes Gained</button>
+        <div id="result"></div>
+      </div>
+
+    <div class="social-icons">
+        <a href="https://twitter.com/datamicarella" target="_blank">
+            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter">
+        </a>
+        <a href="https://www.instagram.com/danteamicarella/" target="_blank">
+            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram">
+        </a>
+        <a href="https://github.com/amicarellade" target="_blank">
+            <img src="images/github-icon.png" alt="GitHub" class="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
+            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn">
+        </a>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

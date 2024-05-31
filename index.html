@@ -47,7 +47,7 @@
         <img class="shelf" id="shelf3">
         <!-- <img class="shelf" id="shelf4"> -->
 
-        <a href="https://github.com/amicarellade/strokes-gained">
+        <a href="golf.html">
             <img src="images/golfclubs.png" alt="Golf Clubs" class="golf-clubs">
         </a>
     </div>
@@ -80,12 +80,31 @@
         </a>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('digitalClock');
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            // const seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = `${hours}:${minutes}`;
+
+            clockElement.textContent = timeString;
+        }
+
+        setInterval(updateClock, 1000);
+
+        function openPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
 
-<!-- https://www.youtube.com/watch?v=6yqywmAkSoM Book reqs -->
-<!-- https://www.cssscript.com/animated-virtual-bookshelf/ virtual bookshelf -->
 <!-- https://medium.com/swlh/how-to-create-your-first-login-page-with-html-css-and-javascript-602dd71144f1 login page -->
 <!-- https://www.youtube.com/watch?v=AF6vGYIyV8M pop up for how to -->
 <!-- https://medium.com/netguin/how-to-create-an-interactive-spinning-globe-with-d3-js-and-react-724fbcf8a0cd Globe -->
