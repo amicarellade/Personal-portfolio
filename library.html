@@ -1,204 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="library.css" />
     <title>Dante Amicarella - Library</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
     <header>
-      <div class="container">
-        <img src="images/logo.png" alt="logo" class="logo" />
-        <nav>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li>
-              <a href="mailto:dante.amicarella@gmail.com" class="Contact"
-                >Contact</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <div class="container">
+            <a href="index.html"><img src="images/logo.png" alt="logo" class="logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Book Recommendation Form -->
     <div class="recommendation-section">
-      <h2>Recommend a Book</h2>
-      <form id="recommendation-form">
-        <input
-          type="text"
-          id="book-title"
-          placeholder="Enter book title"
-          required
-        />
-        <button type="submit">Add Book</button>
-      </form>
-      <ul id="book-recommendations">
-        <!-- Book recommendations will be added here -->
-      </ul>
+        <h2>Recommend a Book</h2>
+        <form id="recommendation-form">
+            <input type="text" id="book-title" placeholder="Enter book title" required />
+            <button type="submit">Add Book</button>
+        </form>
+        <ul id="book-recommendations">
+            <!-- Book recommendations will be added here -->
+        </ul>
     </div>
     <div class="book-list">
-      <h2 id="reading-books-title">
-        Books I'm Reading (as of <span id="current-date"></span>)
-      </h2>
-      <ul id="reading-books">
-        <li>The Great Gatsby by F. Scott Fitzgerald</li>
-        <li>To Kill a Mockingbird by Harper Lee</li>
-        <li>1984 by George Orwell</li>
-        <!-- Add more books here -->
-      </ul>
+        <h2 id="reading-books-title">Books I'm Reading (as of <span id="current-date"></span>)</h2>
+        <ul id="reading-books">
+            <li>The Count of Monte Cristo</li>
+            <li>Deep Thinking by Gary Kasparov</li>
+        </ul>
     </div>
 
-    <!-- Books I've Read Section -->
     <div class="book-list">
-      <h2>Books I've Read</h2>
-      <ul id="read-books">
-        <li>Pride and Prejudice by Jane Austen</li>
-        <li>Moby Dick by Herman Melville</li>
-        <li>War and Peace by Leo Tolstoy</li>
-        <!-- Add more books here -->
-      </ul>
+        <h2>Books I've read in no particular order <br> (definitely some books I missed along the way...)</h2>
+        <ul id="read-books">
+            <li>11/22/63</li>
+            <li>Shoe Dog</li>
+            <li>Da Vinci Code</li>
+            <li>Alchemist</li>
+            <li>Lying</li>
+            <li>The Kite Runner</li>
+            <li>The Subtle Art of Not Giving a F*ck</li>
+            <li>Atomic Habits</li>
+            <li>Strength in What Remains</li>
+            <li>The Catalysts</li>
+            <li>Make Your Bed</li>
+            <li>David and Goliath</li>
+            <li>Outliers</li>
+            <li>Blink</li>
+            <li>Messy</li>
+            <li>The Expected Goals Philosophy</li>
+            <li>Messy by Tim Harford</li>
+            <li>The Data Detective</li>
+            <li>The Science of Golf</li>
+            <li>Every Shot Counts</li>
+            <li>Catch-22</li>
+            <li>Tools of Titans</li>
+            <li>East of Eden</li>
+            <li>The Inner Game of Tennis</li>
+            <li>The Four</li>
+            <li>Grit</li>
+            <li>Tomorrow and Tomorrow and Tomorrow</li>
+        </ul>
     </div>
 
     <div class="social-icons">
-      <a href="https://twitter.com/datamicarella" target="_blank">
-        <img
-          src="images/twitter-icon.png"
-          alt="Twitter"
-          class="Twitter"
-        />
-      </a>
-      <a href="https://www.instagram.com/danteamicarella/" target="_blank">
-        <img
-          src="images/instagram-icon.png"
-          alt="Instagram"
-          class="Instagram"
-        />
-      </a>
-      <a href="https://github.com/amicarellade" target="_blank">
-        <img src="images/github-icon.png" alt="GitHub" class="GitHub" />
-      </a>
-      <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
-        <img
-          src="images/linkedin-icon.png"
-          alt="LinkedIn"
-          class="LinkedIn"
-        />
-      </a>
+        <a href="https://twitter.com/datamicarella" target="_blank">
+            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter" />
+        </a>
+        <a href="https://www.instagram.com/danteamicarella/" target="_blank">
+            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram" />
+        </a>
+        <a href="https://github.com/amicarellade" target="_blank">
+            <img src="images/github-icon.png" alt="GitHub" class="GitHub" />
+        </a>
+        <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
+            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn" />
+        </a>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Function to update the reading books title with the current date
-        function updateReadingBooksTitle() {
-          const dateElement = document.getElementById("current-date");
-          const currentDate = new Date();
-          const options = { month: "long", day: "numeric" };
-          const formattedDate = currentDate.toLocaleDateString(
-            undefined,
-            options
-          );
-          dateElement.textContent = formattedDate;
-        }
-
-        updateReadingBooksTitle();
-
-        // Function to add a book recommendation to the list and local storage
-        function addBookRecommendation(bookTitle) {
-          const recommendationList = document.getElementById(
-            "book-recommendations"
-          );
-          const newBookItem = document.createElement("li");
-          newBookItem.textContent = bookTitle;
-
-          const removeButton = document.createElement("button");
-          removeButton.textContent = "Remove";
-          removeButton.className = "remove-button";
-          removeButton.addEventListener("click", function () {
-            if (prompt("Enter password to remove book:") === "yourPassword") {
-              recommendationList.removeChild(newBookItem);
-              // Update local storage
-              const savedBooks =
-                JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-              const updatedBooks = savedBooks.filter(
-                (book) => book !== bookTitle
-              );
-              localStorage.setItem(
-                "recommendedBooks",
-                JSON.stringify(updatedBooks)
-              );
-            } else {
-              alert("Incorrect password.");
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to update the reading books title with the current date
+            function updateReadingBooksTitle() {
+                const dateElement = document.getElementById("current-date");
+                const currentDate = new Date();
+                const options = { month: "long", day: "numeric" };
+                const formattedDate = currentDate.toLocaleDateString(undefined, options);
+                dateElement.textContent = formattedDate;
             }
-          });
 
-          newBookItem.appendChild(removeButton);
-          recommendationList.appendChild(newBookItem);
+            updateReadingBooksTitle();
 
-          // Save to local storage
-          const savedBooks =
-            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-          savedBooks.push(bookTitle);
-          localStorage.setItem("recommendedBooks", JSON.stringify(savedBooks));
-        }
+            // Function to add a book recommendation to the list and local storage
+            function addBookRecommendation(bookTitle) {
+                const recommendationList = document.getElementById("book-recommendations");
+                const newBookItem = document.createElement("li");
+                newBookItem.textContent = bookTitle;
 
-        // Function to load book recommendations from local storage
-        function loadBookRecommendations() {
-          const savedBooks =
-            JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-          const recommendationList = document.getElementById(
-            "book-recommendations"
-          );
-          savedBooks.forEach((bookTitle) => {
-            const newBookItem = document.createElement("li");
-            newBookItem.textContent = bookTitle;
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.className = "remove-button";
+                removeButton.addEventListener("click", function () {
+                    if (prompt("Enter password to remove book:") === "yourPassword") {
+                        recommendationList.removeChild(newBookItem);
+                        // Update local storage
+                        const savedBooks = JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+                        const updatedBooks = savedBooks.filter(book => book !== bookTitle);
+                        localStorage.setItem("recommendedBooks", JSON.stringify(updatedBooks));
+                    } else {
+                        alert("Incorrect password.");
+                    }
+                });
 
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remove";
-            removeButton.className = "remove-button";
-            removeButton.addEventListener("click", function () {
-              if (prompt("Enter password to remove book:") === "123") {
-                recommendationList.removeChild(newBookItem);
-                // Update local storage
-                const updatedBooks = savedBooks.filter(
-                  (book) => book !== bookTitle
-                );
-                localStorage.setItem(
-                  "recommendedBooks",
-                  JSON.stringify(updatedBooks)
-                );
-              } else {
-                alert("Incorrect password.");
-              }
+                newBookItem.appendChild(removeButton);
+                recommendationList.appendChild(newBookItem);
+
+                // Save to local storage
+                const savedBooks = JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+                savedBooks.push(bookTitle);
+                localStorage.setItem("recommendedBooks", JSON.stringify(savedBooks));
+            }
+
+            // Function to load book recommendations from local storage
+            function loadBookRecommendations() {
+                const savedBooks = JSON.parse(localStorage.getItem("recommendedBooks")) || [];
+                const recommendationList = document.getElementById("book-recommendations");
+                savedBooks.forEach(bookTitle => {
+                    const newBookItem = document.createElement("li");
+                    newBookItem.textContent = bookTitle;
+
+                    const removeButton = document.createElement("button");
+                    removeButton.textContent = "Remove";
+                    removeButton.className = "remove-button";
+                    removeButton.addEventListener("click", function () {
+                        if (prompt("Enter password to remove book:") === "123") {
+                            recommendationList.removeChild(newBookItem);
+                            // Update local storage
+                            const updatedBooks = savedBooks.filter(book => book !== bookTitle);
+                            localStorage.setItem("recommendedBooks", JSON.stringify(updatedBooks));
+                        } else {
+                            alert("Incorrect password.");
+                        }
+                    });
+
+                    newBookItem.appendChild(removeButton);
+                    recommendationList.appendChild(newBookItem);
+                });
+            }
+
+            loadBookRecommendations();
+
+            // Event listener for the book recommendation form
+            document.getElementById("recommendation-form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                const bookTitleInput = document.getElementById("book-title");
+                const bookTitle = bookTitleInput.value.trim();
+                if (bookTitle) {
+                    addBookRecommendation(bookTitle);
+                    bookTitleInput.value = "";
+                }
             });
-
-            newBookItem.appendChild(removeButton);
-            recommendationList.appendChild(newBookItem);
-          });
-        }
-
-        loadBookRecommendations();
-
-        // Event listener for the book recommendation form
-        document
-          .getElementById("recommendation-form")
-          .addEventListener("submit", function (event) {
-            event.preventDefault();
-            const bookTitleInput = document.getElementById("book-title");
-            const bookTitle = bookTitleInput.value.trim();
-            if (bookTitle) {
-              addBookRecommendation(bookTitle);
-              bookTitleInput.value = "";
-            }
-          });
-      });
+        });
     </script>
-  </body>
+</body>
+
 </html>
