@@ -2,22 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="golf.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="golf.css" />
     <title>Dante Amicarella - Strokes Gained</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
     <header>
         <div class="container">
-            <img src="images/logo.png" alt="logo" class="logo">
+            <img src="images/logo.png" alt="logo" class="logo" />
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
+                    <li>
+                        <a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -25,38 +27,62 @@
 
     <div class="container">
         <h1>Golf Strokes Gained Calculator</h1>
+        <p class="caption">
+            Strokes Gained is a statistical measure used in golf to quantify a player's performance in various aspects of the game relative to the field average. It shows how many strokes a player gains or loses in categories like off-the-tee, approach-the-green, around-the-green, and putting.
+        </p>
+        <p class="instructions">
+            <strong>Instructions:</strong><br>
+            1. Enter the par for each hole you played.<br>
+            2. Enter the number of shots you took for each hole.<br>
+            3. For each shot, enter the distance to the hole and the surface type (e.g., tee, fairway, rough, green).<br>
+            4. Add or remove hole's depending on how many you played.<br>
+            5. Click "Calculate Strokes Gained" to see your performance metrics.<br>
+            6. Review the results to see your strokes gained in total and by category (off-the-tee, approach-the-green, around-the-green, putting, and penalties).<br>
+            <br>
+            (Notice!) If you incurred any penalties (e.g., hitting out of bounds or into a hazard), this will not be calculated in your final SG calculations.
+        </p>
         <div id="holesContainer">
-          <div class="hole" id="hole1">
-            <h3>Hole 1</h3>
-            <div class="form-group">
-              <label for="holePar1">Par:</label>
-              <input type="number" class="form-control holePar" id="holePar1" min="3" max="5" data-hole="1">
+            <div class="hole" id="hole1">
+                <h3>Hole 1</h3>
+                <div class="form-group">
+                    <label for="holePar1">Par:</label>
+                    <input type="number" class="form-control holePar" id="holePar1" min="3" max="5" data-hole="1" />
+                </div>
+                <div class="form-group">
+                    <label for="numOfShots1">Number of Shots:</label>
+                    <input type="number" class="form-control numOfShots" id="numOfShots1" min="1" max="10" data-hole="1" />
+                </div>
+                <div id="inputContainer1"></div>
+                <button class="btn btn-danger removeHoleButton" data-hole="1">
+                    Remove Hole
+                </button>
             </div>
-            <div class="form-group">
-              <label for="numOfShots1">Number of Shots:</label>
-              <input type="number" class="form-control numOfShots" id="numOfShots1" min="1" max="10" data-hole="1">
-            </div>
-            <div id="inputContainer1"></div>
-            <button class="btn btn-danger removeHoleButton" data-hole="1">Remove Hole</button>
-          </div>
         </div>
         <button class="btn btn-primary" id="addHoleButton">Add Hole</button>
         <button class="btn btn-success" id="calculateButton">Calculate Strokes Gained</button>
         <div id="result"></div>
-      </div>
+        <div class="categories">
+            <h3>Category Descriptions</h3>
+            <p><strong>Strokes Gained: Off-the-Tee</strong> - Measures player performance off the tee on all par 4s and par 5s. This statistic looks at how much better or worse a player’s drive is compared to the average PGA Tour player.</p>
+            <p><strong>Strokes Gained: Approach-the-Green</strong> - Measures player performance on approach shots and other shots that are not included in strokes gained: around-the-green and strokes gained: putting. It includes tee shots on par 3s.</p>
+            <p><strong>Strokes Gained: Around-the-Green</strong> - Measures player performance on any shot within 30 yards of the edge of the green without measuring putting.</p>
+            <p><strong>Strokes Gained: Putting</strong> - Measures how many strokes a player gains (or loses) on the greens compared to the PGA Tour average.</p>
+            <p><strong>Strokes Gained: Tee-to-Green</strong> - The sum of strokes gained: off-the-tee, strokes gained: approach-the-green, and strokes gained: around-the-green.</p>
+        </div>
+    </div>
 
     <div class="social-icons">
         <a href="https://twitter.com/datamicarella" target="_blank">
-            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter">
+            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter" />
         </a>
         <a href="https://www.instagram.com/danteamicarella/" target="_blank">
-            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram">
+            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram" />
         </a>
         <a href="https://github.com/amicarellade" target="_blank">
-            <img src="images/github-icon.png" alt="GitHub" class="GitHub">
+            <img src="images/github-icon.png" alt="GitHub" class="GitHub" />
         </a>
         <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
-            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn">
+            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn" />
         </a>
     </div>
     <script src="script.js"></script>
