@@ -84,25 +84,25 @@ document.addEventListener('DOMContentLoaded', () => {
   function generateInputs(numOfShots, hole) {
     const container = document.getElementById(`inputContainer${hole}`);
     container.innerHTML = '';
-    
+
     for (let i = 1; i <= numOfShots; i++) {
       const distanceInput = document.createElement('input');
       distanceInput.type = 'number';
       distanceInput.classList.add('form-control', 'mb-2');
       distanceInput.id = `distance${hole}-${i}`;
       distanceInput.placeholder = `Shot ${i} Distance (yards)`;
-      
+
       const surfaceSelect = document.createElement('select');
       surfaceSelect.classList.add('form-control', 'mb-2');
       surfaceSelect.id = `surface${hole}-${i}`;
-      
+
       ['tee', 'fairway', 'rough', 'sand', 'recovery', 'green'].forEach(surface => {
         const option = document.createElement('option');
         option.value = surface;
         option.text = surface.charAt(0).toUpperCase() + surface.slice(1);
         surfaceSelect.appendChild(option);
       });
-      
+
       container.appendChild(distanceInput);
       container.appendChild(surfaceSelect);
     }
@@ -151,14 +151,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sgTeeToGreen = sgOffTheTee + sgApproachTheGreen + sgAroundTheGreen;
 
-    document.getElementById('result').innerHTML = `
-      <p>Total Strokes Gained: ${totalSG.toFixed(2)}</p>
-      <p>Strokes Gained: Off-The-Tee: ${sgOffTheTee.toFixed(2)}</p>
-      <p>Strokes Gained: Approach-The-Green: ${sgApproachTheGreen.toFixed(2)}</p>
-      <p>Strokes Gained: Around-The-Green: ${sgAroundTheGreen.toFixed(2)}</p>
-      <p>Strokes Gained: Putting: ${sgPutting.toFixed(2)}</p>
-      <p>Strokes Gained: Tee-To-Green: ${sgTeeToGreen.toFixed(2)}</p>
-    `;
+    // document.getElementById('result').innerHTML = `
+    //   <p>Total Strokes Gained: ${totalSG.toFixed(2)}</p>
+    //   <p>Strokes Gained: Off-The-Tee: ${sgOffTheTee.toFixed(2)}</p>
+    //   <p>Strokes Gained: Approach-The-Green: ${sgApproachTheGreen.toFixed(2)}</p>
+    //   <p>Strokes Gained: Around-The-Green: ${sgAroundTheGreen.toFixed(2)}</p>
+    //   <p>Strokes Gained: Putting: ${sgPutting.toFixed(2)}</p>
+    //   <p>Strokes Gained: Tee-To-Green: ${sgTeeToGreen.toFixed(2)}</p>
+    // `;
+
+    const chartData = [
+      { category: 'Off-the-Tee', value: sgOffTheTee },
+      { category: 'Approach-the-Green', value: sgApproachTheGreen },
+      { category: 'Around-the-Green', value: sgAroundTheGreen },
+      { category: 'Putting', value: sgPutting },
+      { category: 'Tee-to-Green', value: sgTeeToGreen },
+      { category: 'Total', value: totalSG },
+    ];
+
+    // Update the bar chart
+    updateChart(chartData);
   }
 
   function getSGValue(distance, surface) {
@@ -231,6 +243,105 @@ document.addEventListener('DOMContentLoaded', () => {
     const numOfShots = parseInt(e.target.value);
     generateInputs(numOfShots, hole);
   });
+
+  function updateChart(data) {
+    const svgWidth = 800;
+    const svgHeight = 600;
+    const margin = { top: 50, right: 100, bottom: 100, left: 100 };
+    const width = svgWidth - margin.left - margin.right;
+    const height = svgHeight - margin.top - margin.bottom;
+
+    // Remove existing chart if it exists
+    d3.select('#chart').selectAll('*').remove();
+
+    // Append SVG
+    const svg = d3.select('#chart')
+      .append('svg')
+      .attr('width', svgWidth)
+      .attr('height', svgHeight)
+      .append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    const xScale = d3.scaleBand()
+      .domain(data.map(d => d.category))
+      .range([0, width])
+      .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+      .domain([Math.min(0, d3.min(data, d => d.value)), d3.max(data, d => d.value)])
+      .nice()
+      .range([height, 0]);
+
+    const colorScale = d3.scaleLinear()
+      .domain([d3.min(data, d => d.value), 0, d3.max(data, d => d.value)])
+      .range(['red', 'yellow', 'green']);
+
+    // Add tooltip div
+    const tooltip = d3.select('body').append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0);
+
+    // Add bars
+    svg.selectAll('rect')
+      .data(data)
+      .enter()
+      .append('rect')
+      .attr('x', d => xScale(d.category))
+      .attr('y', d => yScale(Math.max(0, d.value)))
+      .attr('width', xScale.bandwidth())
+      .attr('height', d => Math.abs(yScale(0) - yScale(d.value)))
+      .attr('fill', d => colorScale(d.value))
+      .on('mouseover', function (event, d) {
+        d3.select(this)
+          .style('stroke', 'black')
+          .style('stroke-width', 2);
+        tooltip.transition()
+          .duration(200)
+          .style('opacity', .9);
+        tooltip.html(`SG: ${d.value}`)
+          .style('left', (event.pageX + 5) + 'px')
+          .style('top', (event.pageY - 28) + 'px');
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+          .style('stroke', 'none');
+        tooltip.transition()
+          .duration(500)
+          .style('opacity', 0);
+      });
+
+    // Add origin line
+    svg.append('line')
+      .attr('x1', 0)
+      .attr('y1', yScale(0))
+      .attr('x2', width)
+      .attr('y2', yScale(0))
+      .attr('stroke', 'black')
+      .attr('stroke-width', 1);
+
+    // Add x-axis
+    svg.append('g')
+      .attr('transform', `translate(0,${height})`)
+      .call(d3.axisBottom(xScale))
+      .selectAll('text')
+      .style('text-anchor', 'end')
+      .attr('transform', 'rotate(-45)');
+
+    // Add y-axis
+    svg.append('g')
+      .call(d3.axisLeft(yScale));
+
+    // Add chart title
+    svg.append('text')
+      .attr('x', width / 2)
+      .attr('y', -margin.top / 2)
+      .attr('text-anchor', 'middle')
+      .attr('stroke-width', 2)
+      .style('font-size', '16px')
+      .text('Strokes Gained by Category');
+  }
+
+
 
   generateInputs(1, 1); // Initialize the first hole with 1 input field
 });

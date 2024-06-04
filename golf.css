@@ -8,6 +8,26 @@ h1 {
     margin-bottom: 15px;
 }
 
+#chart {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 8px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 1px solid #333;
+    border-radius: 8px;
+    pointer-events: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
 .caption {
     font-size: 1em;
     color: #555;
