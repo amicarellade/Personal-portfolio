@@ -138,6 +138,11 @@ nav a:hover::before{
     transform: rotate(90deg);
 }
 
+.headphones:hover {
+    transform: rotate(90deg) scale(1.1); 
+}
+
+
 .plant2 {
     right: 20%;
     top: 16%;
@@ -257,7 +262,7 @@ section {
     padding: 30px;
     background-color: #fff;
     margin: 20px 0;
-    border: 2px solid #ddd;
+    border: 2px solid #dfd2d2;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -371,6 +376,46 @@ h1 {
 .remove-button:hover {
     background-color: rgb(173, 2, 2);
 }
+
+.projects-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.project-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    max-width: 100%;
+    text-align: left;
+}
+
+.project-card h2 {
+    margin-top: 0;
+}
+
+.project-card p {
+    margin: 10px 0;
+}
+
+.project-card a.project-link {
+    color: darkolivegreen;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project-card a.project-link:hover {
+    text-decoration: underline;
+}
+
 
 .social-icons {
     display: flex;
