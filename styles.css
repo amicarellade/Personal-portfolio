@@ -271,6 +271,7 @@ h1 {
     text-align: center;
 }
 
+/* About Me Styling */
 .about-me {
     max-width: 1000px;
     margin: 0 auto;
@@ -300,6 +301,37 @@ h1 {
     height: 100%;
     object-fit: cover;
 }
+
+#map-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+#map-container h2 {
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+    color: #333;
+}
+
+#map {
+    width: min(90vw, 900px);  /* responsive width */
+    height: 400px;            /* you can tweak this */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* optional: a bit tighter on very small screens */
+@media (max-width: 600px) {
+    #map {
+        height: 300px;
+    }
+}
+
 
 .recommendation-section {
     background-color: white;

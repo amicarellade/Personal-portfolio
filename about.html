@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <title>Dante Amicarella - About Me</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
 </head>
+
 <body>
     <header>
-        <div class = "container">
-            <a href = "index.html"><img src="images/logo.png" alt="logo" class="logo"></a>
+        <div class="container">
+            <a href="index.html"><img src="images/logo.png" alt="logo" class="logo" /></a>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
+                    <li>
+                        <a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -25,73 +30,174 @@
 
     <div class="about-me">
         <h1>About Me</h1>
-        <p>When I'm not immersed in coding or tackling data science projects, you'll often find me enjoying my time outside. Whether it's waking up early to be one of the first skiers on the mountain to spending hours on the range practicing my golf swing, I always adore spending time outside. 
+        <p>
+            When I'm not immersed in coding or tackling data science projects,
+            you'll often find me enjoying my time outside. Whether it's waking up
+            early to be one of the first skiers on the mountain to spending hours on
+            the range practicing my golf swing, I always adore spending time
+            outside.
         </p>
         <p>
-        I love to explore and visit new places when I am given the opportunity. Some notable locations outside of the US that I have been to include Doha, Auckland, Queenstown, Cairns, Melbourne, Hobart, London, and Cayman Islands. Each place has enriched my perspective and left me with unforgettable experiences.
+            I love to explore and visit new places when I am given the opportunity.
+            Some notable locations outside of the US that I have been to include
+            Doha, Auckland, Queenstown, Cairns, Melbourne, Hobart, London, and
+            Cayman Islands. Each place has enriched my perspective and left me with
+            unforgettable experiences.
         </p>
-        <p>I've been a football fan since I can remember and have always supported Manchester United through the thick and the thin (the last decade). Nevertheless, my favorite player growing up was Xavi Hernandez, now coach of Barcelona. In recent times, I've cultivated a strong passion for reading, steadily expanding my digital library. The thrill of trying new things is something I cherish, and my latest venture involves experimenting with the art of baking.</p>
+        <p>
+            I've been a football fan since I can remember and have always supported
+            Manchester United through the thick and the thin (the last decade).
+            Nevertheless, my favorite player growing up was Xavi Hernandez, now
+            coach of Barcelona. In recent times, I've cultivated a strong passion
+            for reading, steadily expanding my digital library. The thrill of trying
+            new things is something I cherish, and my latest venture involves
+            experimenting with the art of baking.
+        </p>
     </div>
-    
+
     <div class="frame">
         <div class="swiper">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                <div class="swiper-slide"><img src="AboutImages/Skydiving.JPG"></div>
-                <div class="swiper-slide"><img src="AboutImages/BFun.JPG"></div>
-                <div class="swiper-slide"><img src="AboutImages/London.JPG"></div>
-                <div class="swiper-slide"><img src="AboutImages/QMuseum.JPG"></div>
-                <div class="swiper-slide"><img src="AboutImages/NewZealand.JPG"></div>
-                <div class="swiper-slide"><img src="AboutImages/River.JPG"></div>
-                <div class="swiper-slide"><img src="AboutImages/Focaccia.JPG"></div>
-                <div class="swiper-slide"><img src="AboutImages/Bread.JPG"></div>
-
+                <div class="swiper-slide">
+                    <img src="AboutImages/Skydiving.JPG" />
+                </div>
+                <div class="swiper-slide"><img src="AboutImages/BFun.JPG" /></div>
+                <div class="swiper-slide"><img src="AboutImages/London.JPG" /></div>
+                <div class="swiper-slide"><img src="AboutImages/QMuseum.JPG" /></div>
+                <div class="swiper-slide">
+                    <img src="AboutImages/NewZealand.JPG" />
+                </div>
+                <div class="swiper-slide"><img src="AboutImages/River.JPG" /></div>
+                <div class="swiper-slide"><img src="AboutImages/Focaccia.JPG" /></div>
+                <div class="swiper-slide"><img src="AboutImages/Bread.JPG" /></div>
             </div>
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
-          
+
             <!-- If we need navigation buttons -->
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
-          
         </div>
+    </div>
+
+    <div id="map-container">
+        <h2>Where I've Lived</h2>
+        <div id="map"></div>
     </div>
 
     <div class="social-icons">
         <a href="https://twitter.com/datamicarella" target="_blank">
-            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter">
+            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter" />
         </a>
         <a href="https://www.instagram.com/danteamicarella/" target="_blank">
-            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram">
+            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram" />
         </a>
         <a href="https://github.com/amicarellade" target="_blank">
-            <img src="images/github-icon.png" alt="GitHub" class="GitHub">
+            <img src="images/github-icon.png" alt="GitHub" class="GitHub" />
         </a>
         <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
-            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn">
+            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn" />
         </a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <script>
+        // Swiper init (your existing code)
         const swiper = new Swiper('.swiper', {
             autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
             },
-
             loop: true,
-            
             pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
+                el: '.swiper-pagination',
+                clickable: true,
             },
-
             navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
         });
+
+        // ===== Leaflet Map: Places I've Lived =====
+        // Replace these with the real places + coordinates you want
+        const placesLived = [
+            {
+                name: "Somerville, MA, USA",
+                coords: [42.3876, -71.0995],
+                years: "Currently living here"
+            },
+            {
+                name: "Worcester, MA, USA",
+                coords: [42.2626, -71.8023],
+                years: "WPI – undergrad & grad"
+            },
+            {
+                name: "Highland Ranch, CO, USA",
+                coords: [39.5532, -104.9690],
+                years: "High school years"
+            },
+            {
+                name: "Marrieta, GA, USA",
+                coords: [34.0239, -84.4630],
+                years: "Growing up"
+            },
+            {
+                name: "East Cobb, GA, USA",
+                coords: [34.0021, -84.4737],
+                years: "Growing up"
+            },
+            {
+                name: "Midland, TX, USA",
+                coords: [32.0004, -102.0779],
+                years: "Elementary school years"
+            },
+            {
+                name: "Pembroke Pines, FL, USA",
+                coords: [26.0078, -80.2963],
+                years: "Born here"
+            },
+            {
+                name: "Nuevo Leon, Monterrey, MX",
+                coords: [25.6866, -100.3161],
+                years: "Growin up"
+            }
+        ];
+
+        // Create the map
+        const map = L.map('map');
+
+        // Set the initial view to the first place, or a general center
+        if (placesLived.length > 0) {
+            map.setView(placesLived[0].coords, 5);
+        } else {
+            map.setView([20, 0], 2); // fallback global view
+        }
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add markers
+        const bounds = [];
+        placesLived.forEach(place => {
+            const marker = L.marker(place.coords).addTo(map);
+            marker.bindPopup(`<strong>${place.name}</strong><br>${place.years}`);
+            bounds.push(place.coords);
+        });
+
+        // Fit the map to show all markers (if more than 1)
+        if (bounds.length > 1) {
+            map.fitBounds(bounds, { padding: [40, 40] });
+        }
     </script>
+
 </body>
+
 </html>
