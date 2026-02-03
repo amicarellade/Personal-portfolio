@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="library.css" />
     <title>Dante Amicarella - Library</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
@@ -23,162 +24,711 @@
         </div>
     </header>
 
-    <div class="recommendation-section">
-        <h2>Recommend a Book</h2>
-        <form id="recommendation-form">
-            <input type="text" id="book-title" placeholder="Enter book title" required />
-            <button type="submit">Add Book</button>
-        </form>
-        <ul id="book-recommendations">
-            <!-- Book recommendations will be added here -->
-        </ul>
-    </div>
-    <div class="book-list">
-        <h2 id="reading-books-title">Books I'm Reading (as of <span id="current-date"></span>)</h2>
-        <ul id="reading-books">
-            <li>The Green Glass Sea</li>
-            <li>Pride and Prejudice</li>
-        </ul>
+    <div class="container library-page">
+        <h1>My Reading Library</h1>
+
+        <!-- Reading Stats Dashboard -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number" id="totalBooks">46</div>
+                <div class="stat-label">Books Read</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="currentlyReading">2</div>
+                <div class="stat-label">Currently Reading</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avgRating">4.3</div>
+                <div class="stat-label">Avg Rating</div>
+            </div>
+        </section>
+
+        <!-- Genre Distribution Chart -->
+        <section class="chart-section">
+            <h2>Reading by Genre</h2>
+            <div id="genreChart"></div>
+        </section>
+
+        <!-- Filter Buttons -->
+        <section class="filter-section">
+            <h2>Browse Books</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Books</button>
+                <button class="filter-btn" data-filter="currently-reading">Currently Reading</button>
+                <button class="filter-btn" data-filter="fiction">Fiction</button>
+                <button class="filter-btn" data-filter="non-fiction">Non-Fiction</button>
+                <button class="filter-btn" data-filter="data-science">Data Science</button>
+                <button class="filter-btn" data-filter="sports">Sports</button>
+            </div>
+        </section>
+
+        <!-- Currently Reading - Special Section -->
+        <section class="currently-reading-section">
+            <h2>Currently Reading</h2>
+            <div class="book-grid">
+                <div class="book-card featured" data-category="currently-reading fiction">
+                    <div class="book-cover">
+                        <img src="https://www.hachettebookgroup.com/wp-content/uploads/2025/06/9781455563920.jpg?w=421"
+                            alt="Pachinko cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Pachinko</h3>
+                        <p class="author">Min Jun Lee</p>
+                        <div class="book-meta">
+                            <span class="category-tag fiction">Fiction</span>
+                            <span class="reading-status">📖 In Progress</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card featured" data-category="currently-reading fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0IjmAOMwiFQKxLbHDCuv4WgB3UjDrYYVgzQ&s"
+                            alt="Pride and Prejudice cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Pride and Prejudice</h3>
+                        <p class="author">Jane Austen</p>
+                        <div class="book-meta">
+                            <span class="category-tag fiction">Fiction</span>
+                            <span class="reading-status">📖 In Progress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Completed Books -->
+        <section class="completed-books-section">
+            <h2>Books I've Read</h2>
+            <div class="book-grid" id="bookGrid">
+                <!-- Fiction -->
+                <div class="book-card featured" data-category="currently-reading fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1347519126i/149132.jpg"
+                            alt="The Green Glass Sea cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Green Glass Sea</h3>
+                        <p class="author">Ellen Klages</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbdxH0DbWUYmNBFRp8UVH-D0OT2Ze8viqwwA&s"
+                            alt="The Institute cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Institute</h3>
+                        <p class="author">Stephen King</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI4i1r2vFcQSbUj_wQF_CRoYRLI3TVRiF-fQ&s"
+                            alt="The Defining Decade cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Defining Decade</h3>
+                        <p class="author">Meg Jay</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/81pu9otKwJL._AC_UF1000,1000_QL80_.jpg"
+                            alt="11/22/63 cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>11/22/63</h3>
+                        <p class="author">Stephen King</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTexhlgap5ecFqis7gCNoiWVAIEyzqIRjyPFg&s"
+                            alt="The Kite Runner cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Kite Runner</h3>
+                        <p class="author">Khaled Hosseini</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTairFPQCRQt57HYomOZTBezUJUOg564Hgamg&s"
+                            alt="Catch-22 cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Catch-22</h3>
+                        <p class="author">Joseph Heller</p>
+                        <div class="rating">★★★☆☆</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLYFFwW4YMZhvkSw-WFZnGzr9VQb3xAN0PXg&s"
+                            alt="East of Eden cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>East of Eden</h3>
+                        <p class="author">John Steinbeck</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/91KugvH+FwL._AC_UF1000,1000_QL80_.jpg"
+                            alt="Tomorrow and Tomorrow and Tomorrow cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Tomorrow and Tomorrow and Tomorrow</h3>
+                        <p class="author">Gabrielle Zevin</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCHBF6Iqv3ELEVs6JojXWEC0iR5zWBlq3M_Q&s"
+                            alt="Intermezzo cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Intermezzo</h3>
+                        <p class="author">Sally Rooney</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/91nGBd2u8GL._AC_UF1000,1000_QL80_.jpg"
+                            alt="Demon Copperhead cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Demon Copperhead</h3>
+                        <p class="author">Barbara Kingsolver</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqL3XuvNDxt2M6GVX2qysHXx1vW1uCbcrOSg&s"
+                            alt="Dune Messiah cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Dune Messiah</h3>
+                        <p class="author">Frank Herbert</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUzK1W1sVB5wH7RjkIij2cKdXs7ez3j04DcA&s"
+                            alt="Children of Dune cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Children of Dune</h3>
+                        <p class="author">Frank Herbert</p>
+                        <div class="rating">★★★☆☆</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/71OGFWzsdIL._AC_UF1000,1000_QL80_.jpg"
+                            alt="The Goldfinch cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Goldfinch</h3>
+                        <p class="author">Donna Tartt</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq5LyvVXmIZH3fGkH2l463b1Nwf57Mkx2jSg&s"
+                            alt="Slaughterhouse-Five cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Slaughterhouse-Five</h3>
+                        <p class="author">Kurt Vonnegut</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR3dMxZyCduPupLlN6gq0hp3E7Y4jNCzydjg&s"
+                            alt="Project Hail Mary" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Project Hail Mary</h3>
+                        <p class="author">Andy Weir</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQwlRFt7A7pOPMwpOBQpx7f3qI9ElybZVb6Q&s"
+                            alt="The Alchemist cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Alchemist</h3>
+                        <p class="author">Paulo Coelho</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTg2DQquyaFhJfxsFdQZPSvZLftKUAQHoFuA&s"
+                            alt="The Da Vinci Code cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Da Vinci Code</h3>
+                        <p class="author">Dan Brown</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSirSx42JUNiNCUy3Yscss4pC6rJjenFMw6UQ&s"
+                            alt="The Boys in the Boat cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Boys in the Boat</h3>
+                        <p class="author">Daniel James Brown</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1IdA8NL_KcHn2yLA5JC1_2Tu4KkbIH3tgeA&s"
+                            alt="Harry Potter cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Harry Potter Series</h3>
+                        <p class="author">JK. Rowling</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag fiction">Fiction</span>
+                    </div>
+                </div>
+
+                <!-- Non-Fiction / Business / Self-Help -->
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9FUAw1-4RAIszrAHFuVixGR7hq6hCLpYrKg&s"
+                            alt="The Psychology of Money cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Psychology of Money</h3>
+                        <p class="author">Morgan Housel</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/71AqHmnXppL._AC_UF1000,1000_QL80_.jpg"
+                            alt="Shoe Dog cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Shoe Dog</h3>
+                        <p class="author">Phil Knight</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEjw4ZsmKK2POgoqIk1ubHUKFxQjQ8b11ybQ&s"
+                            alt="Atomic Habits cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Atomic Habits</h3>
+                        <p class="author">James Clear</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDg7g4G4noCRirArFlduwDp9Nk6U8FQMxtxA&s"
+                            alt="The Substle Art of Not Giving a Fuck cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Subtle Art of Not Giving a F*ck</h3>
+                        <p class="author">Mark Manson</p>
+                        <div class="rating">★★☆☆☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgsmi2tmNDlUuuZY5RYVhpVupifdvbKQmGQA&s"
+                            alt="Outliers cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Outliers</h3>
+                        <p class="author">Malcolm Gladwell</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/61tdYH1yHsL._AC_UF1000,1000_QL80_.jpg"
+                            alt="Blink cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Blink</h3>
+                        <p class="author">Malcolm Gladwell</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/617nKBGpBjL._AC_UF1000,1000_QL80_.jpg"
+                            alt="David and Goliath cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>David and Goliath</h3>
+                        <p class="author">Malcolm Gladwell</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6hcqmYqAmNk2kqjPwnEMovF6iPGRh5duV-w&s"
+                            alt="Grit cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Grit</h3>
+                        <p class="author">Angela Duckworth</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/71t3PAc7G2L._UF1000,1000_QL80_.jpg"
+                            alt="Lying cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Lying</h3>
+                        <p class="author">Sam Harris</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcj_fRwRQjmr-4Prrv8rdeiLDtXSfa43EIgQ&s"
+                            alt="Make Your Bed cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Make Your Bed</h3>
+                        <p class="author">William H. McRaven</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/61UIDFafg8L._AC_UF1000,1000_QL80_.jpg"
+                            alt="Tools of Titans cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Tools of Titans</h3>
+                        <p class="author">Tim Ferriss</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/81+d3K6-R2L._AC_UF1000,1000_QL80_.jpg"
+                            alt="Strength in What Remains cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Strength in What Remains</h3>
+                        <p class="author">Tracy Kidder</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2-RmyGr_LCQahvRhaQL-54_ge0GyobbgIHA&s"
+                            alt="The Four cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Four</h3>
+                        <p class="author">Scott Galloway</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/610ZqgrwJqL._AC_UF1000,1000_QL80_.jpg"
+                            alt="The Catalyst cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Catalysts</h3>
+                        <p class="author">Jonah Berger</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="non-fiction">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/61o-7yn1CbL._AC_UF1000,1000_QL80_.jpg"
+                            alt="Messy cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Messy</h3>
+                        <p class="author">Tim Harford</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag non-fiction">Non-Fiction</span>
+                    </div>
+                </div>
+
+                <!-- Data Science & Tech -->
+                <div class="book-card" data-category="data-science">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ZkuYXOK4BCr9_Y951x-COQjtf1l5XFKisg&s"
+                            alt="The Data Detective cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Data Detective</h3>
+                        <p class="author">Tim Harford</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag data-science">Data Science</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="data-science">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1521650404i/31934455.jpg"
+                            alt="Deep Thinking cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Deep Thinking</h3>
+                        <p class="author">Garry Kasparov</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag data-science">Data Science</span>
+                    </div>
+                </div>
+
+                <!-- Sports -->
+                <div class="book-card" data-category="sports">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNUMlerqqwREdUUCKDc5WRwW83D5Iix8cOCg&s"
+                            alt="Every Shot Counts cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>Every Shot Counts</h3>
+                        <p class="author">Mark Broadie</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag sports">Sports</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="sports">
+                    <div class="book-cover">
+                        <img src="https://m.media-amazon.com/images/I/71YgacaEKyL._AC_UF1000,1000_QL80_.jpg"
+                            alt="The Science of Golf cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Science of Golf</h3>
+                        <p class="author">Will Haskett</p>
+                        <div class="rating">★★★★☆</div>
+                        <span class="category-tag sports">Sports</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="sports">
+                    <div class="book-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrLWOmZ6LPJBvxSA7RSaD5gzhREKTLLDbfFQ&s"
+                            alt="The Expected Goals Philosophy cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Expected Goals Philosophy</h3>
+                        <p class="author">James Tippett</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag sports">Sports</span>
+                    </div>
+                </div>
+
+                <div class="book-card" data-category="sports">
+                    <div class="book-cover">
+                        <img src="https://prodimage.images-bn.com/pimages/9780679778318_p0_v10_s1200x630.jpg"
+                            alt="The Inner Game of Tennis cover" loading="lazy">
+                    </div>
+                    <div class="book-info">
+                        <h3>The Inner Game of Tennis</h3>
+                        <p class="author">W. Timothy Gallwey</p>
+                        <div class="rating">★★★★★</div>
+                        <span class="category-tag sports">Sports</span>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="book-list">
-        <h2>Books I've read in no particular order <br> (definitely some books I missed along the way...)</h2>
-        <ul id="read-books">
-            <li>11/22/63</li>
-            <li>Shoe Dog</li>
-            <li>Da Vinci Code</li>
-            <li>Alchemist</li>
-            <li>Lying</li>
-            <li>The Kite Runner</li>
-            <li>The Subtle Art of Not Giving a F*ck</li>
-            <li>Atomic Habits</li>
-            <li>Strength in What Remains</li>
-            <li>The Catalysts</li>
-            <li>Make Your Bed</li>
-            <li>David and Goliath</li>
-            <li>Outliers</li>
-            <li>Blink</li>
-            <li>Messy</li>
-            <li>The Expected Goals Philosophy</li>
-            <li>Messy by Tim Harford</li>
-            <li>The Data Detective</li>
-            <li>The Science of Golf</li>
-            <li>Every Shot Counts</li>
-            <li>Catch-22</li>
-            <li>Tools of Titans</li>
-            <li>East of Eden</li>
-            <li>The Inner Game of Tennis</li>
-            <li>The Four</li>
-            <li>Grit</li>
-            <li>Tomorrow and Tomorrow and Tomorrow</li>
-            <li>Deep Thinking by Gary Kasparov</li>
-            <li>The Boys in the Boat</li>
-            <li>Intermezzo</li>
-            <li>Demon Copperhead</li>
-            <li>Dune Mesiah</li>
-            <li>Children of Dune</li>
-            <li>The Goldfinch</li>
-            <li>Slaughter House Five</li>
-            <li>Project Hail Mary</li>
-        </ul>
-    </div>
-
-    <div class="social-icons">
+    <footer class="social-icons">
         <a href="https://twitter.com/datamicarella" target="_blank">
-            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter" />
+            <img src="images/twitter-icon.png" alt="Twitter" />
         </a>
         <a href="https://www.instagram.com/danteamicarella/" target="_blank">
-            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram" />
+            <img src="images/instagram-icon.png" alt="Instagram" />
         </a>
         <a href="https://github.com/amicarellade" target="_blank">
-            <img src="images/github-icon.png" alt="GitHub" class="GitHub" />
+            <img src="images/github-icon.png" alt="GitHub" />
         </a>
         <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
-            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn" />
+            <img src="images/linkedin-icon.png" alt="LinkedIn" />
         </a>
-    </div>
+    </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Function to update the reading books title with the current date
-            function updateReadingBooksTitle() {
-                const dateElement = document.getElementById("current-date");
-                const currentDate = new Date();
-                const options = { month: "long", day: "numeric" };
-                const formattedDate = currentDate.toLocaleDateString(undefined, options);
-                dateElement.textContent = formattedDate;
-            }
+        // Genre Chart with D3.js
+        const genreData = [
+            { genre: 'Fiction', count: 25 },
+            { genre: 'Non-Fiction', count: 15 },
+            { genre: 'Data Science', count: 2 },
+            { genre: 'Sports', count: 4 }
+        ];
 
-            updateReadingBooksTitle();
+        const width = Math.min(500, window.innerWidth - 40);
+        const height = 300;
+        const margin = { top: 20, right: 20, bottom: 40, left: 40 };
 
-            // Function to add a book recommendation to the list and local storage
-            function addBookRecommendation(bookTitle) {
-                const recommendationList = document.getElementById("book-recommendations");
-                const newBookItem = document.createElement("li");
-                newBookItem.textContent = bookTitle;
+        const svg = d3.select('#genreChart')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
 
-                const removeButton = document.createElement("button");
-                removeButton.textContent = "Remove";
-                removeButton.className = "remove-button";
-                removeButton.addEventListener("click", function () {
-                    if (prompt("Enter password to remove book:") === "yourPassword") {
-                        recommendationList.removeChild(newBookItem);
-                        // Update local storage
-                        const savedBooks = JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-                        const updatedBooks = savedBooks.filter(book => book !== bookTitle);
-                        localStorage.setItem("recommendedBooks", JSON.stringify(updatedBooks));
+        const x = d3.scaleBand()
+            .domain(genreData.map(d => d.genre))
+            .range([margin.left, width - margin.right])
+            .padding(0.2);
+
+        const y = d3.scaleLinear()
+            .domain([0, d3.max(genreData, d => d.count)])
+            .nice()
+            .range([height - margin.bottom, margin.top]);
+
+        const colors = ['#667eea', '#f093fb', '#84fab0', '#ffecd2'];
+
+        svg.selectAll('rect')
+            .data(genreData)
+            .join('rect')
+            .attr('x', d => x(d.genre))
+            .attr('y', d => y(d.count))
+            .attr('width', x.bandwidth())
+            .attr('height', d => y(0) - y(d.count))
+            .attr('fill', (d, i) => colors[i])
+            .attr('rx', 5);
+
+        svg.selectAll('text.label')
+            .data(genreData)
+            .join('text')
+            .attr('class', 'label')
+            .attr('x', d => x(d.genre) + x.bandwidth() / 2)
+            .attr('y', d => y(d.count) - 5)
+            .attr('text-anchor', 'middle')
+            .text(d => d.count)
+            .style('font-size', '14px')
+            .style('font-weight', 'bold')
+            .style('fill', '#333');
+
+        svg.append('g')
+            .attr('transform', `translate(0,${height - margin.bottom})`)
+            .call(d3.axisBottom(x))
+            .style('font-size', '12px');
+
+        svg.append('g')
+            .attr('transform', `translate(${margin.left},0)`)
+            .call(d3.axisLeft(y).ticks(5))
+            .style('font-size', '12px');
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const bookCards = document.querySelectorAll('.book-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+
+                // Filter books
+                bookCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
                     } else {
-                        alert("Incorrect password.");
+                        const categories = card.dataset.category.split(' ');
+                        if (categories.includes(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
                     }
                 });
-
-                newBookItem.appendChild(removeButton);
-                recommendationList.appendChild(newBookItem);
-
-                // Save to local storage
-                const savedBooks = JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-                savedBooks.push(bookTitle);
-                localStorage.setItem("recommendedBooks", JSON.stringify(savedBooks));
-            }
-
-            // Function to load book recommendations from local storage
-            function loadBookRecommendations() {
-                const savedBooks = JSON.parse(localStorage.getItem("recommendedBooks")) || [];
-                const recommendationList = document.getElementById("book-recommendations");
-                savedBooks.forEach(bookTitle => {
-                    const newBookItem = document.createElement("li");
-                    newBookItem.textContent = bookTitle;
-
-                    const removeButton = document.createElement("button");
-                    removeButton.textContent = "Remove";
-                    removeButton.className = "remove-button";
-                    removeButton.addEventListener("click", function () {
-                        if (prompt("Enter password to remove book:") === "123") {
-                            recommendationList.removeChild(newBookItem);
-                            // Update local storage
-                            const updatedBooks = savedBooks.filter(book => book !== bookTitle);
-                            localStorage.setItem("recommendedBooks", JSON.stringify(updatedBooks));
-                        } else {
-                            alert("Incorrect password.");
-                        }
-                    });
-
-                    newBookItem.appendChild(removeButton);
-                    recommendationList.appendChild(newBookItem);
-                });
-            }
-
-            loadBookRecommendations();
-
-            // Event listener for the book recommendation form
-            document.getElementById("recommendation-form").addEventListener("submit", function (event) {
-                event.preventDefault();
-                const bookTitleInput = document.getElementById("book-title");
-                const bookTitle = bookTitleInput.value.trim();
-                if (bookTitle) {
-                    addBookRecommendation(bookTitle);
-                    bookTitleInput.value = "";
-                }
             });
         });
     </script>

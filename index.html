@@ -3,110 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Dante Amicarella - Data Scientist and Developer Portfolio">
+    <meta name="theme-color" content="#556b2f">
+    
     <title>Dante Amicarella - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class = "container">
-            <a href = "index.html"><img src="images/logo.png" alt="logo" class="logo"></a>
-            <nav>
+        <div class="container">
+            <a href="index.html" aria-label="Home">
+                <img src="images/logo.png" alt="Dante Amicarella Logo" class="logo">
+            </a>
+            <nav aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#" onclick="openPopup()">How to</a></li>
+                    <li><a href="#" onclick="openPopup()" aria-label="How to use this website">How to</a></li>
                     <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <div id="room">
+    <!-- Main Room -->
+    <main id="room" role="main">
+        <!-- Digital Clock -->
         <div class="digital-clock-container">
             <div class="clock-case">
-                <div class="digital-clock" id="digitalClock"></div>
+                <div class="digital-clock" id="digitalClock" aria-live="polite">00:00</div>
             </div>
         </div>
 
-        <a href="about.html"> 
-            <img src="images/Friends1.png" alt="picture" class="picture">
+        <!-- Picture Frame - Links to About -->
+        <a href="about.html" aria-label="About me" > 
+            <img src="images/Friends1.png" alt="Picture frame - Click to learn about me" class="picture">
         </a>
-        <img src="images/Plant1.png" alt="plant1" class="plant1">
-        <img class="shelf" id="shelf1">
 
-        <img src="images/Plant2.png" alt="plant2" class="plant2">
-        <a href="projects.html"> 
-            <img src="images/headphones.png" alt="headphones" class="headphones">
+        <!-- First Plant -->
+        <img src="images/Plant1.png" alt="Decorative plant" class="plant1">
+
+        <!-- First Shelf -->
+        <img class="shelf" id="shelf1" alt="">
+
+        <!-- Second Plant -->
+        <img src="images/Plant2.png" alt="Decorative plant" class="plant2">
+
+        <!-- Headphones - Links to Projects -->
+        <a href="projects.html" aria-label="View my projects"> 
+            <img src="images/headphones.png" alt="Headphones - Click to see my projects" class="headphones">
         </a>
-        <img class="shelf" id="shelf2">
+
+        <!-- Second Shelf -->
+        <img class="shelf" id="shelf2" alt="">
         
-        <a href="library.html">
-            <img src="images/Books.png" alt="books" class="books">
+        <!-- Books - Links to Library -->
+        <a href="library.html" aria-label="View my reading library">
+            <img src="images/Books.png" alt="Books - Click to see my reading list" class="books">
         </a>
-        <a href="resume.html">
-            <img src="images/Resume-2.png" alt="resume" class="resume">
-        </a>
-        <img class="shelf" id="shelf3">
-        <!-- <img class="shelf" id="shelf4"> -->
 
-        <a href="golf.html">
-            <img src="images/golfclubs.png" alt="Golf Clubs" class="golf-clubs">
+        <!-- Resume -->
+        <a href="resume.html" aria-label="View my resume">
+            <img src="images/Resume-2.png" alt="Resume - Click to view my resume" class="resume">
         </a>
-    </div>
 
-    <div class="popup-overlay" id="popup">
+        <!-- Third Shelf -->
+        <img class="shelf" id="shelf3" alt="">
+
+        <!-- Golf Clubs - Links to Golf Calculator -->
+        <a href="golf.html" aria-label="Golf strokes gained calculator">
+            <img src="images/golfclubs.png" alt="Golf clubs - Click for golf calculator" class="golf-clubs">
+        </a>
+    </main>
+
+    <!-- Welcome Popup -->
+    <div class="popup-overlay" id="popup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
         <div class="popup-content">
-            <h2>Welcome to my personal website!</h2>
-            <p>You need to explore my shelves to find out more about me!
-                <br> Use your mouse to hover over the elements throughout the room.  
-                <br> If they move, click and find out what information they have.
-                <br> 
-                <br> Enjoy!
+            <h2 id="popup-title">Welcome to my personal website!</h2>
+            <p>
+                Explore my shelves to find out more about me.
+                Use your mouse to hover over the elements throughout the room. 
+                If they move, click and find out what information they have.
             </p>
-            <button onclick="closePopup()">Close</button>
+            <p><strong>Enjoy!</strong></p>
+            <button onclick="closePopup()" aria-label="Close welcome message">Close</button>
         </div>
     </div>
 
-    <div class="social-icons">
-        <a href="https://twitter.com/datamicarella" target="_blank">
-            <img src="images/twitter-icon.png" alt="Twitter" class="Twitter">
+    <!-- Social Icons Footer -->
+    <footer class="social-icons" role="contentinfo">
+        <a href="https://twitter.com/datamicarella" target="_blank" rel="noopener noreferrer" aria-label="Twitter profile">
+            <img src="images/twitter-icon.png" alt="Twitter">
         </a>
-        <a href="https://www.instagram.com/danteamicarella/" target="_blank">
-            <img src="images/instagram-icon.png" alt="Instagram" class="Instagram">
+        <a href="https://www.instagram.com/danteamicarella/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+            <img src="images/instagram-icon.png" alt="Instagram">
         </a>
-        <a href="https://github.com/amicarellade" target="_blank">
-            <img src="images/github-icon.png" alt="GitHub" class="GitHub">
+        <a href="https://github.com/amicarellade" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+            <img src="images/github-icon.png" alt="GitHub">
         </a>
-        <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank">
-            <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn">
+        <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+            <img src="images/linkedin-icon.png" alt="LinkedIn">
         </a>
-    </div>
+    </footer>
 
+    <!-- Scripts -->
     <script>
+        // Digital Clock
         function updateClock() {
             const clockElement = document.getElementById('digitalClock');
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
-            // const seconds = now.getSeconds().toString().padStart(2, '0');
             const timeString = `${hours}:${minutes}`;
-
             clockElement.textContent = timeString;
         }
 
+        // Update clock immediately and then every second
+        updateClock();
         setInterval(updateClock, 1000);
 
+        // Popup functions
         function openPopup() {
-            document.getElementById('popup').style.display = 'flex';
+            const popup = document.getElementById('popup');
+            popup.style.display = 'flex';
+            // Focus trap for accessibility
+            popup.querySelector('button').focus();
         }
 
         function closePopup() {
-            document.getElementById('popup').style.display = 'none';
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
         }
+
+        // Close popup on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePopup();
+            }
+        });
+
+        // Close popup when clicking outside
+        document.getElementById('popup').addEventListener('click', (e) => {
+            if (e.target.id === 'popup') {
+                closePopup();
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
     </script>
 </body>
 </html>
-
-<!-- https://medium.com/swlh/how-to-create-your-first-login-page-with-html-css-and-javascript-602dd71144f1 login page -->
-<!-- https://www.youtube.com/watch?v=AF6vGYIyV8M pop up for how to -->
-<!-- https://medium.com/netguin/how-to-create-an-interactive-spinning-globe-with-d3-js-and-react-724fbcf8a0cd Globe -->

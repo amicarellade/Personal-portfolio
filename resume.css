@@ -1,0 +1,451 @@
+/* Resume Page Modern Styling */
+
+.resume-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+}
+
+/* =============================================
+   RESUME HEADER
+   ============================================= */
+.resume-header {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #4a5f2f 100%);
+    border-radius: 16px;
+    color: white;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 24px rgba(85, 107, 47, 0.2);
+}
+
+.resume-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: white;
+}
+
+.tagline {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    margin: 0 0 1.5rem 0;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: underline;
+    transition: opacity 0.3s ease;
+}
+
+.contact-info a:hover {
+    opacity: 0.8;
+}
+
+/* =============================================
+   SECTION STYLING
+   ============================================= */
+.resume-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resume-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--color-accent);
+    position: relative;
+}
+
+.section-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.view-all-link {
+    margin-left: auto;
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.view-all-link:hover {
+    transform: translateX(5px);
+}
+
+.section-content {
+    color: var(--color-text);
+}
+
+/* =============================================
+   EDUCATION SECTION
+   ============================================= */
+.education-item {
+    padding: 1rem 0;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.item-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.date {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.degree-info {
+    margin-bottom: 1.5rem;
+}
+
+.degree {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-accent);
+}
+
+.degree strong {
+    font-size: 1.05rem;
+}
+
+.gpa {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.coursework {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.coursework-section {
+    padding: 1rem;
+    background: #fafafa;
+    border-radius: 8px;
+}
+
+.coursework-section strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+    font-size: 0.95rem;
+}
+
+.coursework-section p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* =============================================
+   SKILLS SECTION
+   ============================================= */
+.skills-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.skill-category h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(85, 107, 47, 0.2);
+}
+
+/* =============================================
+   EXPERIENCE & PROJECT ITEMS
+   ============================================= */
+.experience-item,
+.project-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.experience-item:last-child,
+.project-item:last-child {
+    border-bottom: none;
+}
+
+.company {
+    margin: 0.25rem 0 0 0;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.achievements {
+    margin: 1rem 0 0 0;
+    padding-left: 1.5rem;
+    list-style: none;
+}
+
+.achievements li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+.achievements li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.achievements li:last-child {
+    margin-bottom: 0;
+}
+
+/* =============================================
+   DOWNLOAD SECTION
+   ============================================= */
+.download-section {
+    text-align: center;
+    margin: 3rem 0 2rem;
+}
+
+.download-btn {
+    background: linear-gradient(135deg, var(--color-accent) 0%, #4a5f2f 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(85, 107, 47, 0.3);
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(85, 107, 47, 0.4);
+}
+
+.download-btn:active {
+    transform: translateY(-1px);
+}
+
+/* =============================================
+   RESPONSIVE DESIGN
+   ============================================= */
+@media (max-width: 768px) {
+    .resume-container {
+        padding: 1rem 0.5rem 3rem;
+    }
+
+    .resume-header {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .resume-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .item-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .date {
+        align-self: flex-start;
+    }
+
+    .degree {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .section-header {
+        flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .view-all-link {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .resume-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .section-icon {
+        font-size: 1.5rem;
+    }
+
+    .skill-tag {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* =============================================
+   PRINT STYLES
+   ============================================= */
+@media print {
+    body {
+        background: white;
+    }
+
+    .resume-container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .resume-section {
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+
+    .download-section,
+    header,
+    footer,
+    .social-icons {
+        display: none;
+    }
+
+    .resume-header {
+        background: white;
+        color: black;
+        box-shadow: none;
+        border: 2px solid var(--color-accent);
+    }
+
+    .resume-header h1,
+    .tagline,
+    .contact-info,
+    .contact-info a {
+        color: black;
+    }
+
+    .skill-tag:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resume-section {
+    animation: fadeInUp 0.6s ease;
+}
+
+.resume-section:nth-child(1) { animation-delay: 0.1s; }
+.resume-section:nth-child(2) { animation-delay: 0.2s; }
+.resume-section:nth-child(3) { animation-delay: 0.3s; }
+.resume-section:nth-child(4) { animation-delay: 0.4s; }

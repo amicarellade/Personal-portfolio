@@ -1,0 +1,33 @@
+{
+  "name": "dante-amicarella-portfolio",
+  "version": "2.0.0",
+  "description": "Personal portfolio website showcasing data science projects and skills",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "vite build && gh-pages -d dist",
+    "clean": "rm -rf dist node_modules",
+    "lint": "echo 'Linting not configured yet'",
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\""
+  },
+  "keywords": [
+    "portfolio",
+    "data-science",
+    "web-development"
+  ],
+  "author": "Dante Amicarella",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "prettier": "^3.8.0",
+    "terser": "^5.46.0",
+    "vite": "^5.4.21"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amicarellade/Personal-portfolio.git"
+  },
+  "homepage": "https://amicarellade.github.io/Personal-portfolio/"
+}
