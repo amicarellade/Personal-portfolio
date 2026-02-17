@@ -5,21 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Dante Amicarella - Data Scientist and Developer Portfolio">
     <meta name="theme-color" content="#556b2f">
-    
     <title>Dante Amicarella - Portfolio</title>
-    
-    <!-- Preload critical assets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <a href="index.html" aria-label="Home">
@@ -35,71 +27,67 @@
         </div>
     </header>
 
-    <!-- Main Room -->
     <main id="room" role="main">
-        <!-- Digital Clock -->
-        <div class="digital-clock-container">
-            <div class="clock-case">
-                <div class="digital-clock" id="digitalClock" aria-live="polite">00:00</div>
-            </div>
+
+        <!-- LEFT COLUMN: shelf1 + shelf3 -->
+        <div class="column left-col">
+
+            <!-- Section 1: Shelf 1, Plant 1, Headphones -->
+            <section class="shelf-section" id="section1">
+                <img src="images/Plant1.png" alt="Decorative plant" class="plant1">
+                <a href="projects.html" aria-label="View my projects">
+                    <img src="images/headphones.png" alt="Headphones" class="headphones">
+                </a>
+                <img class="shelf" id="shelf1" alt="">
+            </section>
+
+            <!-- Section 3: Shelf 3, Books, Resume -->
+            <section class="shelf-section" id="section3">
+                <a href="library.html" aria-label="View my reading library">
+                    <img src="images/Books.png" alt="Books" class="books">
+                </a>
+                <a href="resume.html" aria-label="View my resume">
+                    <img src="images/Resume-2.png" alt="Resume" class="resume">
+                </a>
+                <!-- Golf clubs: fixed bottom left -->
+                <a href="golf.html" aria-label="Golf strokes gained calculator" class="golf-clubs-link">
+                    <img src="images/golfclubs.png" alt="Golf clubs" class="golf-clubs">
+                </a>
+                <img class="shelf" id="shelf3" alt="">
+            </section>
+
         </div>
 
-        <!-- Picture Frame - Links to About -->
-        <a href="about.html" aria-label="About me" > 
-            <img src="images/Friends1.png" alt="Picture frame - Click to learn about me" class="picture">
-        </a>
+        <!-- RIGHT COLUMN (staggered lower): shelf2 -->
+        <div class="column right-col">
 
-        <!-- First Plant -->
-        <img src="images/Plant1.png" alt="Decorative plant" class="plant1">
+            <!-- Section 2: Shelf 2, Picture, Plant 2, Clock -->
+            <section class="shelf-section" id="section2">
+                <a href="about.html" aria-label="About me">
+                    <img src="images/Friends1.png" alt="Picture frame" class="picture">
+                </a>
+                <img src="images/Plant2.png" alt="Decorative plant" class="plant2">
+                <div class="digital-clock-container">
+                    <div class="clock-case">
+                        <div class="digital-clock" id="digitalClock" aria-live="polite">00:00</div>
+                    </div>
+                </div>
+                <img class="shelf" id="shelf2" alt="">
+            </section>
 
-        <!-- First Shelf -->
-        <img class="shelf" id="shelf1" alt="">
+        </div>
 
-        <!-- Second Plant -->
-        <img src="images/Plant2.png" alt="Decorative plant" class="plant2">
-
-        <!-- Headphones - Links to Projects -->
-        <a href="projects.html" aria-label="View my projects"> 
-            <img src="images/headphones.png" alt="Headphones - Click to see my projects" class="headphones">
-        </a>
-
-        <!-- Second Shelf -->
-        <img class="shelf" id="shelf2" alt="">
-        
-        <!-- Books - Links to Library -->
-        <a href="library.html" aria-label="View my reading library">
-            <img src="images/Books.png" alt="Books - Click to see my reading list" class="books">
-        </a>
-
-        <!-- Resume -->
-        <a href="resume.html" aria-label="View my resume">
-            <img src="images/Resume-2.png" alt="Resume - Click to view my resume" class="resume">
-        </a>
-
-        <!-- Third Shelf -->
-        <img class="shelf" id="shelf3" alt="">
-
-        <!-- Golf Clubs - Links to Golf Calculator -->
-        <a href="golf.html" aria-label="Golf strokes gained calculator">
-            <img src="images/golfclubs.png" alt="Golf clubs - Click for golf calculator" class="golf-clubs">
-        </a>
     </main>
 
-    <!-- Welcome Popup -->
     <div class="popup-overlay" id="popup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
         <div class="popup-content">
             <h2 id="popup-title">Welcome to my personal website!</h2>
-            <p>
-                Explore my shelves to find out more about me.
-                Use your mouse to hover over the elements throughout the room. 
-                If they move, click and find out what information they have.
-            </p>
+            <p>Explore my shelves to find out more about me. Use your mouse to hover over the elements throughout the room. If they move, click and find out what information they have.</p>
             <p><strong>Enjoy!</strong></p>
             <button onclick="closePopup()" aria-label="Close welcome message">Close</button>
         </div>
     </div>
 
-    <!-- Social Icons Footer -->
     <footer class="social-icons" role="contentinfo">
         <a href="https://twitter.com/datamicarella" target="_blank" rel="noopener noreferrer" aria-label="Twitter profile">
             <img src="images/twitter-icon.png" alt="Twitter">
@@ -115,53 +103,28 @@
         </a>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // Digital Clock
         function updateClock() {
-            const clockElement = document.getElementById('digitalClock');
+            const el = document.getElementById('digitalClock');
             const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const timeString = `${hours}:${minutes}`;
-            clockElement.textContent = timeString;
+            el.textContent = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
         }
-
-        // Update clock immediately and then every second
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Popup functions
         function openPopup() {
             const popup = document.getElementById('popup');
             popup.style.display = 'flex';
-            // Focus trap for accessibility
             popup.querySelector('button').focus();
         }
 
         function closePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
         }
 
-        // Close popup on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closePopup();
-            }
-        });
-
-        // Close popup when clicking outside
-        document.getElementById('popup').addEventListener('click', (e) => {
-            if (e.target.id === 'popup') {
-                closePopup();
-            }
-        });
-
-        // Add loading animation
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+        document.getElementById('popup').addEventListener('click', e => { if (e.target.id === 'popup') closePopup(); });
+        window.addEventListener('load', () => document.body.classList.add('loaded'));
     </script>
 </body>
 </html>

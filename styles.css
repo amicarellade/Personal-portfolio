@@ -155,171 +155,163 @@ nav a:hover::before {
 /* =============================================
    ROOM LAYOUT - DESKTOP
    ============================================= */
+
 #room {
-    position: relative;
-    min-height: 100vh;
     width: 100%;
-    padding: var(--spacing-lg) 0;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* Shelf styling - Using percentage-based positioning for flexibility */
+/* ── Two-column float layout ── */
+.column {
+    float: left;
+    width: 50%;
+}
+
+.right-col {
+    margin-top: 200px; /* stagger right column lower than left */
+}
+
+/* Clear floats */
+#room::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* ── Shelf sections ── */
+.shelf-section {
+    position: relative;
+    width: 90%;
+    margin: 60px auto;   /* vertical gap between sections in same column */
+}
+
+/* Shelf image fills its section */
 .shelf {
     content: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1996003/basic-wood-wall-shelf-clipart-md.png");
-    width: 35%;
-    min-width: 280px;
-    max-width: 500px;
+    width: 120%;
     height: auto;
-    position: absolute;
+    display: block;
+    position: relative;
     z-index: 1;
 }
 
-#shelf1 { 
-    left: 12%;
-    top: 18vh;
-}
-
-#shelf2 { 
-    right: 12%;
-    top: 38vh;
-}
-
-#shelf3 { 
-    left: 12%;
-    top: 58vh;
-}
-
-/* Interactive Items - Base Styles */
-.plant1, 
-.headphones, 
-.plant2, 
-.books, 
-.digital-clock-container, 
-.resume, 
-.picture, 
-.golf-clubs {
+/* ── Items: all positioned relative to their shelf-section ── */
+.plant1,
+.headphones,
+.plant2,
+.books,
+.resume,
+.picture,
+.digital-clock-container {
     position: absolute;
     z-index: 10;
-    transition: transform var(--transition-base);
     cursor: pointer;
+    transition: transform var(--transition-base);
 }
 
-/* Hover effects for interactive items */
-.headphones:hover,
+/* Hover effects */
+.headphones:hover  { transform: rotate(90deg) scale(1.1); }
 .books:hover,
-.resume:hover,
-.golf-clubs:hover {
-    transform: scale(1.1);
-}
+.resume:hover      { transform: scale(1.1); }
+.picture:hover     { transform: scale(1.1); }
 
-.picture:hover {
-    transform: translateX(-50%) scale(1.1);
-}
-
-/* ===== SHELF 1 ITEMS ===== */
-/* Plant 1 - sits on left side of shelf 1 */
+/* ── Section 1: Plant1, Headphones ── */
 .plant1 {
-    left: 6%; 
-    top: calc(18vh - 6%);
-    width: 20%;
-    min-width: 500px;
-    max-width: 600px;
+    bottom: 14%;     /* sits on the shelf */
+    left: 0%;
+    width: 80%;
 }
 
-/* Headphones - sits on right side of shelf 1 */
 .headphones {
-    top: calc(18vh - 6%); 
-    left: 24%; 
-    width: 12%;
-    min-width: 300px;
-    max-width: 400px;
+    bottom: 42%;
+    right: 10%;
+    width: 55%;
     transform: rotate(90deg);
 }
 
-.headphones:hover {
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* ===== SHELF 2 ITEMS ===== */
-/* Plant 2 - sits on left side of shelf 2 */
-.plant2 {
-    right: calc(15% + 15%);  /* Positioned relative to shelf 2 */
-    top: calc(38vh - 10%);
-    width: 8%;
-    min-width: 150px;
-    max-width: 200px;
-}
-
-/* Clock - sits on middle of shelf 2 */
-.digital-clock-container {
-    top: calc(38vh - 0%);
-    right: calc(15% + 8%);
-    z-index: 6;
-}
-
-/* Picture - hangs above shelf 2 */
+/* ── Section 2: Picture, Plant2, Clock ── */
 .picture {
-    position: relative;
-    top: calc(18vh - 16%);
-    left: 70%; 
-    transform: translateX(-50%);
-    width: 50%;
-    min-width: 500px;
-    max-width: 500px;
+    bottom: 70%;
+    left: 0%;
+    /* transform: translateX(-50%); */
+    width: 90%;
+    z-index: 5;
 }
 
-/* ===== SHELF 3 ITEMS ===== */
-/* Books - sits on left side of shelf 3 */
+.plant2 {
+    bottom: 57%;
+    left: 20%;
+    width: 30%;
+}
+
+.digital-clock-container {
+    bottom: 65%;
+    right: 30%;
+    z-index: 6;
+    /* Scale the entire container with viewport */
+    transform: scale(clamp(0.6, 1.5vw, 1));
+    transform-origin: center;
+}
+
+/* ── Section 3: Books, Resume, Golf Clubs ── */
 .books {
-    top: calc(58vh - 6%); 
-    left: 18%; 
-    width: 12%;
-    min-width: 250px;
-    max-width: 300px;
+    bottom: 50%;
+    left: 20%;
+    width: 40%;
 }
 
-/* Resume - sits above shelf 3 */
 .resume {
-    top: calc(58vh - 20%);
-    left: 28%; 
-    width: 12%;
-    min-width: 250px;
-    max-width: 300px;
+    bottom: 80%;
+    right: 10%;
+    width: 45%;
+}
+
+/* ── Golf clubs: positioned in section 3 ── */
+.golf-clubs-link {
+    position: absolute;
+    bottom: -50%;
+    left: -30%;
+    z-index: 5;
+    pointer-events: none; /* Container doesn't capture clicks */
 }
 
 .golf-clubs {
-    bottom: -30%; 
+    width: 70%;
+    height: auto;
+    display: block;
     transform: rotate(-20deg);
-    left: -8vw;
-    width: 30%;
-    min-width: 200px; 
-    max-width: 400px;
-    transform-origin: bottom left;  /* Pivot point for hover */
+    transform-origin: bottom left;
+    cursor: pointer;
+    transition: transform var(--transition-base);
+    pointer-events: auto; /* Only the image captures clicks */
 }
 
 .golf-clubs:hover {
-    transform: scale(1.05) rotate(-22deg);  /* Subtle tilt on hover */
+    transform: rotate(-22deg) scale(1.05);
 }
 
+/* ── Clock ── */
 .clock-case {
     position: relative;
     background-color: var(--color-clock-case);
-    border-radius: 15px;
-    padding: clamp(0.25rem, 1vw, .25rem);
+    border-radius: clamp(8px, 1.5vw, 15px);
+    padding: clamp(0.3rem, 0.8vw, 0.6rem) clamp(0.6rem, 1.5vw, 1.2rem);
     box-shadow: var(--shadow-lg);
+    white-space: nowrap;
 }
 
 .clock-case::before {
     content: '';
     position: absolute;
-    inset: -4px;
-    border-radius: 15px;
+    inset: clamp(-2px, -0.5vw, -4px);
+    border-radius: clamp(8px, 1.5vw, 15px);
     background-color: var(--color-clock-frame);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     z-index: -1;
 }
 
 .digital-clock {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-size: clamp(1rem, 1.8vw, 2rem);
     color: var(--color-text);
     font-weight: 500;
     letter-spacing: 0.05em;
@@ -413,11 +405,11 @@ nav a:hover::before {
    ============================================= */
 section {
     padding: var(--spacing-xl);
-    background-color: var(--color-bg-secondary);
+    background-color: transparent;
     margin: var(--spacing-lg) 0;
-    border: 2px solid var(--color-border);
-    border-radius: 10px;
-    box-shadow: var(--shadow-md);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 h1 {
@@ -538,6 +530,9 @@ h2 {
     gap: clamp(1rem, 4vw, 2.5rem);
     padding: var(--spacing-lg);
     background-color: var(--color-bg-primary);
+    position: relative;
+    z-index: 10; /* Ensure footer stays above golf clubs */
+    border-top: 3px solid var(--color-accent); /* Line above social icons */
 }
 
 .social-icons img {
@@ -550,469 +545,6 @@ h2 {
 .social-icons img:hover {
     transform: scale(1.15) rotate(5deg);
     filter: grayscale(0);
-}
-
-/* =============================================
-   RESPONSIVE - TABLET & MOBILE LAYOUTS
-   ============================================= */
-
-@media (max-width: 1200px) and (min-width:1000px){
-    #room {
-        min-height: 100vh;
-    }
-    
-    .shelf {
-        width: 38%;
-        min-width: 250px;
-    }
-    
-    #shelf1 {
-        left: 10%;
-        top: 15vh;
-    }
-    
-    #shelf2 {
-        right: 10%;
-        top: 35vh;
-    }
-    
-    #shelf3 {
-        left: 10%;
-        top: 55vh;
-    }
-    
-    /* Shelf 1 items */
-    .plant1 {
-        left: 4%;
-        top: calc(15vh - 6%);
-        width: 18%;
-        min-width: 450px;
-        max-width: 500px;
-    }
-    
-    .headphones {
-        left: 25%;
-        top: calc(15vh - 5%);
-        width: 10%;
-        min-width: 250px;
-        max-width: 300px;
-    }
-    
-    .picture {
-        left: 70%;
-        top: calc(15vh - 10%);
-        width: 22%;
-        min-width: 450px;
-        max-width: 550px;
-        z-index: -10;
-    }
-    
-    /* Shelf 2 items */
-    .plant2 {
-        right: 30%;
-        top: calc(35vh - 8%);
-        width: 7%;
-        min-width: 125px;
-        max-width: 175px;
-    }
-    
-    .digital-clock-container {
-        right: calc(10% + 10%);
-        top: calc(35vh);
-    }
-    
-    /* Shelf 3 items */
-    .books {
-        left: 15%;
-        top: calc(55vh - 8%);
-        width: 10%;
-        min-width: 250px;
-        max-width: 350px;
-    }
-    
-    .resume {
-        left: 30%;
-        top: calc(55vh - 20%);
-        width: 10%;
-        min-width: 225px;
-        max-width: 250px;
-    }
-    
-    .golf-clubs {
-        bottom: -20%;
-        left: -10vw;
-        width: 25%;
-        min-width: 350px;
-        max-width: 400px;
-    }
-}
-
-/* iPad Pro / Large Tablets (1024px - 834px) */
-@media (max-width: 999px) and (min-width: 835px) {
-    #room {
-        min-height: 100vh;
-    }
-    
-    .shelf {
-        width: 38%;
-        min-width: 250px;
-    }
-    
-    #shelf1 {
-        left: 10%;
-        top: 15vh;
-    }
-    
-    #shelf2 {
-        right: 10%;
-        top: 35vh;
-    }
-    
-    #shelf3 {
-        left: 10%;
-        top: 55vh;
-    }
-    
-    /* Shelf 1 items */
-    .plant1 {
-        left: 4%;
-        top: calc(15vh - 6%);
-        width: 18%;
-        min-width: 400px;
-        max-width: 550px;
-    }
-    
-    .headphones {
-        left: 23%;
-        top: calc(15vh - 6%);
-        width: 10%;
-        min-width: 250px;
-        max-width: 300px;
-    }
-    
-    .picture {
-        left: 70%;
-        top: calc(15vh - 10%);
-        width: 22%;
-        min-width: 450px;
-        max-width: 550px;
-        z-index: -10;
-    }
-    
-    /* Shelf 2 items */
-    .plant2 {
-        right: 30%;
-        top: calc(35vh - 10%);
-        width: 7%;
-        min-width: 125px;
-        max-width: 175px;
-    }
-    
-    .digital-clock-container {
-        right: 20%;
-        top: calc(35vh - 1%);
-    }
-    
-    /* Shelf 3 items */
-    .books {
-        left: 15%;
-        top: calc(55vh - 6%);
-        width: 10%;
-        min-width: 225px;
-        max-width: 325px;
-    }
-    
-    .resume {
-        left: 30%;
-        top: calc(55vh - 20%);
-        width: 10%;
-        min-width: 225px;
-        max-width: 250px;
-    }
-    
-    .golf-clubs {
-        bottom: -20%;
-        left: -10vw;
-        width: 25%;
-        min-width: 300px;
-        max-width: 350px;
-    }
-}
-
-/* iPad / Standard Tablets (834px - 600px) */
-@media (max-width: 834px) and (min-width: 601px) {
-    #room {
-        min-height: 100vh;
-        padding: var(--spacing-md) 0;
-    }
-    
-    .shelf {
-        width: 45%;
-        min-width: 220px;
-        max-width: 350px;
-    }
-    
-    #shelf1 {
-        left: 8%;
-        top: 12vh;
-    }
-    
-    #shelf2 {
-        right: 8%;
-        top: 32vh;
-    }
-    
-    #shelf3 {
-        left: 8%;
-        top: 52vh;
-    }
-    
-    /* Shelf 1 items */
-    .plant1 {
-        left: -2%;
-        top: calc(10vh - 4%);
-        width: 16%;
-        min-width: 400px;
-        max-width: 500px;
-    }
-    
-    .headphones {
-        left: 25%;
-        top: calc(12vh - 5%);
-        width: 9%;
-        min-width: 225px;
-        max-width: 275px;
-    }
-    
-    .picture {
-        left: 70%;
-        top: calc(12vh - 12%);
-        width: 20%;
-        min-width: 400px;
-        max-width: 500px;
-    }
-    
-    /* Shelf 2 items */
-    .plant2 {
-        right: 30%;
-        top: calc(32vh - 10%);
-        width: 6%;
-        min-width:125px;
-        max-width: 150px;
-    }
-    
-    .digital-clock-container {
-        right: 18%;
-        top: calc(32vh - 0%);
-    }
-    
-    .clock-case {
-        padding: 0.4rem 0.8rem;
-    }
-    
-    .digital-clock {
-        font-size: 1.3rem;
-    }
-    
-    /* Shelf 3 items */
-    .books {
-        left: 12%;
-        top: calc(52vh - 6%);
-        width: 9%;
-        min-width: 200px;
-        max-width: 250px;
-    }
-    
-    .resume {
-        left: 23%;
-        top: calc(52vh - 20%);
-        width: 9%;
-        min-width: 200px;
-        max-width: 300px;
-    }
-    
-    .golf-clubs {
-        bottom: -10%;
-        left: -10vw;
-        width: 22%;
-        min-width: 300px;
-        max-width: 350px;
-    }
-}
-
-/* Tablets and below - transition to stacked layout */
-/* Tablets and below - transition to stacked layout */
-@media (max-width: 600px) and (min-width: 481px) {
-    nav a {
-        color: var(--color-bg-primary);
-        text-transform: uppercase;
-        font-size: clamp(0.875rem, 3vw, var(--font-size-lg));
-        font-weight: 500;
-        padding: var(--spacing-xs) 0;
-        display: inline-block;
-        transition: color var(--transition-base);
-    }
-
-    nav a:hover {
-        color: var(--color-accent-hover);
-    }
-
-    nav a::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 3px;
-        background-color: var(--color-accent-hover);
-        transition: width var(--transition-base);
-    }
-
-    nav a:hover::before {
-        width: 100%;
-    }
-    body {
-        overflow-x: hidden;
-    }
-    
-    /* Stack header items */
-    header .container {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-    }
-    
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    /* Room becomes a vertical stack on mobile */
-    #room {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        padding: var(--spacing-md) var(--spacing-sm);
-        height: auto;
-        min-height: auto;
-    }
-    
-    /* All shelves become relative and stack */
-    .shelf {
-        position: relative;
-        width: 85vw;
-        max-width: 450px;
-        top: auto !important;
-        left: auto !important;
-        right: auto !important;
-        margin: var(--spacing-lg) 0 var(--spacing-md);
-    }
-    
-    /* Items sit on shelves using negative margins */
-    .plant1,
-    .plant2,
-    .headphones,
-    .books,
-    .resume,
-    .picture,
-    .golf-clubs,
-    .digital-clock-container {
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
-        transform: none !important;
-        margin: 0 auto;
-    }
-    
-    /* Order items to match shelf arrangement */
-    .picture { order: 1; width: 20vw; max-width: 200px ; right: 70% !important}
-    .plant1 { order: 2; width: 45vw; max-width: 260px; margin-top: 45vw; right: 20% !important}
-    /* headphones had a large positive margin which pushed it away; make negative to overlap shelf */
-    .headphones { order: 3; width: 42vw; max-width: 260px; margin-top: -2vw; transform: rotate(90deg) !important; right:10% !important;}
-    #shelf1 { order: 4; }
-    
-    .plant2 { order: 5; margin-top:85vw; min-width: 150px !important; max-width: 200px !important; left:25% !important}
-    .digital-clock-container { order: 6; margin-top:100vw; width: auto; max-width: none; right:30% !important}
-    #shelf2 { order: 7; }
-    
-    .books { order: 8; top: 20vh; margin-top:88vw; left: 25% !important; min-width:200px !important; max-width: 225px !important;}
-    .resume { order: 9; margin-top: 70vw; max-width: 150px !important;}
-    #shelf3 { order: 10; }
-    
-    .golf-clubs { order: 11; width: 65vw; max-width: 380px; margin-top: 110vw !important; left:-20% !important; transform: rotate(-20deg) !important;}
-    
-    /* Maintain hover effects */
-    .headphones:hover {
-        transform: rotate(90deg) scale(1.1) !important;
-    }
-    
-    .picture:hover,
-    .books:hover,
-    .resume:hover,
-    .golf-clubs:hover {
-        transform: scale(1.1) !important;
-    }
-    
-    /* Clock styling for mobile */
-    .clock-case {
-        display: inline-block;
-    }
-    
-    /* Adjust sections */
-    section {
-        padding: var(--spacing-md);
-    }
-    
-    .projects-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Small phones - tighter overlaps */
-@media (max-width: 480px) {
-    .picture { margin-bottom: -22vw; }
-    .plant1 { margin-bottom: -20vw; }
-    .headphones { margin-bottom: -18vw; }
-    .plant2 { margin-bottom: -16vw; }
-    .digital-clock-container { margin-bottom: -14vw; }
-    .books { margin-bottom: -14vw; }
-    .resume { margin-bottom: -12vw; }
-    .golf-clubs { margin-top: -10vw; width: 80vw; }
-    
-    nav a {
-        font-size: 0.875rem;
-    }
-    
-    .shelf {
-        width: 90vw;
-    }
-}
-
-/* Device-specific tuning: iPhone 13 (approx 390px) */
-@media (max-width: 390px) {
-    /* Slightly smaller items and gentle overlap so they sit neatly on shelves */
-    .picture { width: 46vw; max-width: 220px; margin-bottom: -10vw; }
-    .plant1  { width: 44vw; max-width: 200px; margin-bottom: -10vw; }
-    .headphones { width: 40vw; max-width: 200px; margin-bottom: -8vw; transform: rotate(90deg) !important; }
-    .plant2  { width: 40vw; max-width: 180px; margin-bottom: -8vw; }
-    .digital-clock-container { margin-bottom: -6vw; }
-    .books   { width: 42vw; max-width: 200px; margin-bottom: -9vw; }
-    .resume  { width: 40vw; max-width: 200px; margin-bottom: -8vw; }
-    .golf-clubs { width: 78vw; max-width: 380px; margin-top: -9vw; }
-}
-
-/* Device-specific tuning: iPhone SE / 375px wide devices */
-@media (max-width: 375px) {
-    /* Slightly stronger overlap for the narrower screen */
-    .picture { width: 48vw; max-width: 210px; margin-bottom: -12vw; }
-    .plant1  { width: 46vw; max-width: 200px; margin-bottom: -12vw; }
-    .headphones { width: 42vw; max-width: 190px; margin-bottom: -10vw; transform: rotate(90deg) !important; }
-    .plant2  { width: 42vw; max-width: 180px; margin-bottom: -10vw; }
-    .digital-clock-container { margin-bottom: -8vw; }
-    .books   { width: 44vw; max-width: 200px; margin-bottom: -11vw; }
-    .resume  { width: 42vw; max-width: 190px; margin-bottom: -9vw; }
-    .golf-clubs { width: 82vw; max-width: 400px; margin-top: -10vw; }
 }
 
 
