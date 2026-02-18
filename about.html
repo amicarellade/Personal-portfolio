@@ -8,9 +8,230 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <title>Dante Amicarella - About Me</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
 
+    <style>
+        /* D3 Map Styles */
+        #map-container {
+            position: relative;
+            background: linear-gradient(135deg, rgba(85, 107, 47, 0.08) 0%, rgba(51, 51, 51, 0.05) 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(85, 107, 47, 0.2);
+        }
+
+        #map-container h2 {
+            font-family: 'Space Mono', monospace;
+            text-align: center;
+            color: darkolivegreen;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        #map {
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #faf8f3;
+        }
+
+        .country {
+            fill: #e8e4db;
+            stroke: #c9c3b8;
+            stroke-width: 0.8;
+            transition: fill 0.3s ease;
+        }
+
+        .country:hover {
+            fill: #ddd9d0;
+        }
+
+        .travel-path {
+            fill: none;
+            stroke: darkolivegreen;
+            stroke-width: 3;
+            stroke-linecap: round;
+            opacity: 0.75;
+            filter: drop-shadow(0 2px 4px rgba(85, 107, 47, 0.3));
+        }
+
+        .location-marker {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .location-marker circle {
+            fill: #556b2f;
+            stroke: #333;
+            stroke-width: 2.5;
+            filter: drop-shadow(0 2px 6px rgba(85, 107, 47, 0.4));
+        }
+
+        .location-marker:hover circle {
+            r: 11;
+            fill: #333;
+            stroke: #556b2f;
+            stroke-width: 3;
+        }
+
+        .location-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            fill: #333;
+            text-anchor: middle;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8),
+                         0 0 8px rgba(255, 255, 255, 0.6);
+            opacity: 0;
+            animation: fadeInLabel 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInLabel {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .map-tooltip {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.98);
+            color: #333;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 2px solid darkolivegreen;
+            font-family: 'Roboto', sans-serif;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .map-tooltip.show {
+            opacity: 1;
+        }
+
+        .map-tooltip h3 {
+            font-family: 'Space Mono', monospace;
+            color: darkolivegreen;
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .map-tooltip p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .map-tooltip p strong {
+            color: #333;
+        }
+
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: #333;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #556b2f;
+            border: 2px solid #333;
+            box-shadow: 0 2px 6px rgba(85, 107, 47, 0.4);
+        }
+
+        .legend-line {
+            width: 30px;
+            height: 3px;
+            background: darkolivegreen;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(85, 107, 47, 0.3);
+        }
+
+        .map-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .map-btn {
+            font-family: 'Space Mono', monospace;
+            padding: 0.7rem 1.8rem;
+            background: transparent;
+            border: 2px solid darkolivegreen;
+            color: darkolivegreen;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .map-btn:hover {
+            background: darkolivegreen;
+            color: #f6eee3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(85, 107, 47, 0.3);
+        }
+
+        .map-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            #map {
+                height: 400px;
+            }
+
+            .map-legend {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .map-controls {
+                flex-direction: column;
+            }
+
+            .map-btn {
+                width: 100%;
+            }
+
+            #map-container {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -65,13 +286,13 @@
                 </div>
                 <div class="swiper-slide"><img src="AboutImages/BFun.JPG" /></div>
                 <div class="swiper-slide"><img src="AboutImages/London.JPG" /></div>
-                <div class="swiper-slide"><img src="AboutImages/QMuseum.JPG" /></div>
-                <div class="swiper-slide">
+                <!-- <div class="swiper-slide"><img src="AboutImages/QMuseum.JPG" /></div> -->
+                <!-- <div class="swiper-slide">
                     <img src="AboutImages/NewZealand.JPG" />
-                </div>
-                <div class="swiper-slide"><img src="AboutImages/River.JPG" /></div>
-                <div class="swiper-slide"><img src="AboutImages/Focaccia.JPG" /></div>
-                <div class="swiper-slide"><img src="AboutImages/Bread.JPG" /></div>
+                </div> -->
+                <!-- <div class="swiper-slide"><img src="AboutImages/River.JPG" /></div> -->
+                <!-- <div class="swiper-slide"><img src="AboutImages/Focaccia.JPG" /></div> -->
+                <!-- <div class="swiper-slide"><img src="AboutImages/Bread.JPG" /></div> -->
             </div>
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
@@ -84,7 +305,24 @@
 
     <div id="map-container">
         <h2>Where I've Lived</h2>
-        <div id="map"></div>
+        <svg id="map"></svg>
+        <div class="map-tooltip"></div>
+        
+        <div class="map-legend">
+            <div class="legend-item">
+                <div class="legend-dot"></div>
+                <span>Locations</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-line"></div>
+                <span>Journey Path</span>
+            </div>
+        </div>
+
+        <div class="map-controls">
+            <button class="map-btn" onclick="animateJourney()">Replay Journey</button>
+            <button class="map-btn" onclick="resetMap()">Reset</button>
+        </div>
     </div>
 
     <div class="social-icons">
@@ -101,12 +339,11 @@
             <img src="images/linkedin-icon.png" alt="LinkedIn" class="LinkedIn" />
         </a>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script>
-        // Swiper init (your existing code)
+        // Swiper initialization
         const swiper = new Swiper('.swiper', {
             autoplay: {
                 delay: 5000,
@@ -123,79 +360,229 @@
             },
         });
 
-        // ===== Leaflet Map: Places I've Lived =====
-        // Replace these with the real places + coordinates you want
-        const placesLived = [
+        // ===== D3 Animated Map: Places I've Lived =====
+        
+        // CONFIGURE YOUR LOCATIONS HERE - Update with your actual places
+        const locations = [
             {
-                name: "Somerville, MA, USA",
-                coords: [42.3876, -71.0995],
-                years: "Currently living here"
+                name: "Pembroke Pines, FL",
+                coords: [-80.2963, 26.0078],
+                years: "Born Here",
+                description: "Where it all began"
             },
             {
-                name: "Worcester, MA, USA",
-                coords: [42.2626, -71.8023],
-                years: "WPI – undergrad & grad"
+                name: "Marietta, GA",
+                coords: [-84.4630, 34.0239],
+                years: "Growing Up",
+                description: "Spent formative years here"
             },
             {
-                name: "Highland Ranch, CO, USA",
-                coords: [39.5532, -104.9690],
-                years: "High school years"
+                name: "Monterrey, MX",
+                coords: [-100.3161, 25.6866],
+                years: "Growing Up",
+                description: "Growing up in Mexico"
             },
             {
-                name: "Marrieta, GA, USA",
-                coords: [34.0239, -84.4630],
-                years: "Growing up"
+                name: "Marietta, GA",
+                coords: [-84.4630, 34.0239],
+                years: "Back to Georgia",
+                description: "Returned to Marietta"
             },
             {
-                name: "East Cobb, GA, USA",
-                coords: [34.0021, -84.4737],
-                years: "Growing up"
+                name: "Midland, TX",
+                coords: [-102.0779, 32.0004],
+                years: "Elementary",
+                description: "Elementary school years"
             },
             {
-                name: "Midland, TX, USA",
-                coords: [32.0004, -102.0779],
-                years: "Elementary school years"
+                name: "Highland Ranch, CO",
+                coords: [-104.9690, 39.5532],
+                years: "High School",
+                description: "High school years"
             },
             {
-                name: "Pembroke Pines, FL, USA",
-                coords: [26.0078, -80.2963],
-                years: "Born here"
-            },
+                name: "Worcester, MA",
+                coords: [-71.8023, 42.2626],
+                years: "College Years",
+                description: "WPI – undergrad & grad"
+            },   
             {
-                name: "Nuevo Leon, Monterrey, MX",
-                coords: [25.6866, -100.3161],
-                years: "Growin up"
+                name: "Somerville, MA",
+                coords: [-71.0995, 42.3876],
+                years: "Present",
+                description: "Currently living here"
             }
         ];
 
-        // Create the map
-        const map = L.map('map');
+        // Map setup
+        const mapContainer = document.getElementById('map-container');
+        const width = mapContainer.offsetWidth - 64;
+        const height = 600;
 
-        // Set the initial view to the first place, or a general center
-        if (placesLived.length > 0) {
-            map.setView(placesLived[0].coords, 5);
-        } else {
-            map.setView([20, 0], 2); // fallback global view
-        }
+        const svg = d3.select("#map")
+            .attr("viewBox", [0, 0, width, height])
+            .attr("width", width)
+            .attr("height", height);
 
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
+        // Use geoMercator to show both US and Mexico
+        const projection = d3.geoMercator()
+            .center([-95, 37])
+            .scale(width * 0.7)  // Reduced from 1.1 to 0.7 for more zoom out
+            .translate([width / 2, height / 2]);
 
-        // Add markers
-        const bounds = [];
-        placesLived.forEach(place => {
-            const marker = L.marker(place.coords).addTo(map);
-            marker.bindPopup(`<strong>${place.name}</strong><br>${place.years}`);
-            bounds.push(place.coords);
+        const path = d3.geoPath().projection(projection);
+        const tooltip = d3.select('.map-tooltip');
+
+        let animationInProgress = false;
+
+        // Load world map data to include Mexico
+        Promise.all([
+            d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json'),
+            d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+        ]).then(([us, world]) => {
+            // Draw US states
+            svg.append("g")
+                .selectAll("path")
+                .data(topojson.feature(us, us.objects.states).features)
+                .join("path")
+                .attr("class", "country")
+                .attr("d", path);
+
+            // Draw Mexico (country code 484)
+            const mexico = topojson.feature(world, world.objects.countries).features
+                .filter(d => d.id === "484");
+            
+            svg.append("g")
+                .selectAll("path.mexico")
+                .data(mexico)
+                .join("path")
+                .attr("class", "country")
+                .attr("d", path);
+
+            // Create path line generator
+            const lineGenerator = d3.line()
+                .x(d => projection(d)[0])
+                .y(d => projection(d)[1])
+                .curve(d3.curveCardinal);
+
+            // Draw paths between locations
+            const pathGroup = svg.append("g").attr("class", "paths");
+
+            for (let i = 0; i < locations.length - 1; i++) {
+                const pathData = [locations[i].coords, locations[i + 1].coords];
+                
+                const pathElement = pathGroup.append("path")
+                    .datum(pathData)
+                    .attr("class", "travel-path")
+                    .attr("d", lineGenerator)
+                    .attr("stroke-dasharray", function() {
+                        return this.getTotalLength();
+                    })
+                    .attr("stroke-dashoffset", function() {
+                        return this.getTotalLength();
+                    });
+            }
+
+            // Add location markers
+            const markers = svg.append("g").attr("class", "markers");
+
+            locations.forEach((location, index) => {
+                const coords = projection(location.coords);
+                
+                const marker = markers.append("g")
+                    .attr("class", "location-marker")
+                    .attr("transform", `translate(${coords[0]}, ${coords[1]})`)
+                    .style("opacity", 0)
+                    .on("mouseover", function(event) {
+                        tooltip.html(`
+                            <h3>${location.name}</h3>
+                            <p><strong>${location.years}</strong></p>
+                            <p>${location.description}</p>
+                        `)
+                        .style("left", (event.pageX + 15) + "px")
+                        .style("top", (event.pageY - 15) + "px")
+                        .classed("show", true);
+                    })
+                    .on("mouseout", function() {
+                        tooltip.classed("show", false);
+                    });
+
+                marker.append("circle")
+                    .attr("r", 8);
+
+                marker.append("text")
+                    .attr("class", "location-label")
+                    .attr("dy", -15)
+                    .text(location.name);
+
+                // Initial appearance animation
+                marker.transition()
+                    .delay(index * 300 + 800)
+                    .duration(500)
+                    .style("opacity", 1);
+
+                marker.select("text")
+                    .style("animation-delay", `${index * 0.3 + 0.8}s`);
+            });
+
+            // Initial path animation
+            setTimeout(() => animateJourney(), 1500);
         });
 
-        // Fit the map to show all markers (if more than 1)
-        if (bounds.length > 1) {
-            map.fitBounds(bounds, { padding: [40, 40] });
+        function animateJourney() {
+            if (animationInProgress) return;
+            animationInProgress = true;
+
+            const paths = svg.selectAll(".travel-path");
+            
+            paths.transition()
+                .duration(1500)
+                .delay((d, i) => i * 1500)
+                .attr("stroke-dashoffset", 0)
+                .on("end", function(d, i) {
+                    if (i === paths.size() - 1) {
+                        animationInProgress = false;
+                    }
+                });
         }
+
+        function resetMap() {
+            const paths = svg.selectAll(".travel-path");
+            paths.attr("stroke-dashoffset", function() {
+                return this.getTotalLength();
+            });
+            animationInProgress = false;
+        }
+
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const newWidth = mapContainer.offsetWidth - 64;
+                svg.attr("width", newWidth);
+                projection.center([-95, 37]).scale(newWidth * 0.7).translate([newWidth / 2, height / 2]);
+                
+                svg.selectAll("path").attr("d", path);
+                
+                locations.forEach((location, index) => {
+                    const coords = projection(location.coords);
+                    svg.selectAll(".location-marker")
+                        .filter((d, i) => i === index)
+                        .attr("transform", `translate(${coords[0]}, ${coords[1]})`);
+                });
+
+                // Redraw paths
+                const lineGenerator = d3.line()
+                    .x(d => projection(d)[0])
+                    .y(d => projection(d)[1])
+                    .curve(d3.curveCardinal);
+
+                svg.selectAll(".travel-path").attr("d", function(d) {
+                    return lineGenerator(d);
+                });
+            }, 250);
+        });
     </script>
 
 </body>
