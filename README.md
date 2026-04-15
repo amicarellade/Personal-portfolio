@@ -1,27 +1,65 @@
-Personal Portfolio
-===
+# Dante Amicarella — Personal Portfolio
 
-Dante Amicarella
+A personal portfolio website built with vanilla HTML, CSS, and JavaScript. Features an interactive room-based landing page, animated D3.js travel map, golf strokes-gained calculator, and a personal library tracker.
+
+**Live site:** https://amicarellade.github.io/Personal-portfolio/
+
 ---
 
-Welcome to my personal portfolio! Below you can find the link to my website. Have fun exploring. 
+## Pages
 
-## Links
-Website: https://amicarellade.github.io/Personal-portfolio/index.html
+| Page | File | Description |
+|---|---|---|
+| Home | `index.html` | Interactive room scene with clickable shelf items |
+| About | `about.html` | Bio, photo gallery (Swiper.js), and animated D3 travel map |
+| Projects | `projects.html` | Project cards linking to work |
+| Golf | `golf.html` | Strokes-gained calculator |
+| Library | `library.html` | Personal reading list |
+| Resume | `resume.html` | Resume viewer |
 
-## File Breakdown
-- ProcessBook.pdf - pdf copy of our process book
-- index.html - html page for the website's landing page
-- about.html - html page for all contents related to my personal life
-- library.html - html page for my library
-- golf.html - html page for the strokes gained calculator
-- resume.html - html page for my resume
-- style.css - css styling for index.html, about.html, and resume.html
-- golf.css - css styling for golf.html
-- library.css - css styling for library.html
-- script.js - logic and implementation behind the strokes gained calculator displayed on golf.html
+## Tech Stack
 
-## Notice
+- **Vanilla HTML/CSS/JS** — no frontend framework
+- **D3.js v7** — animated travel map with TopoJSON world/US data
+- **Swiper.js** — photo carousel on the About page
+- **Vite** — dev server and build tooling
+- **gh-pages** — deployment to GitHub Pages
 
-I have tried making this website as adaptable and flexible for all user monitors, however, I am not perfect and am sure there will be some mistakes along the way. Feel free to email me with recommendations or bugs you have found along the way. Additionally, I have included a screenshot of what the website landing page ~should~ look like. 
-<img width="1421" alt="Screenshot 2024-06-02 at 9 52 53 PM" src="https://github.com/amicarellade/Personal-portfolio/assets/56127779/7eb414a5-4529-4930-a538-89546323b158">
+## Project Structure
+
+```
+├── index.html          # Landing page
+├── about.html          # About page
+├── projects.html       # Projects page
+├── golf.html           # Golf calculator
+├── library.html        # Library page
+├── resume.html         # Resume page
+├── styles.css          # Shared styles (index, about, resume)
+├── about.css           # (legacy) about page styles
+├── golf.css            # Golf page styles
+├── library.css         # Library page styles
+├── script.js           # Strokes-gained calculator logic
+├── images/             # Logos, icons, shelf image
+├── AboutImages/        # Photo gallery images
+├── vite.config.js      # Vite multi-page build config
+└── package.json
+```
+
+## Local Development
+
+```bash
+npm install
+npm run dev       # starts dev server at localhost:3000
+```
+
+## Build & Deploy
+
+```bash
+npm run build     # outputs to /dist
+npm run preview   # preview the production build at localhost:4173
+npm run deploy    # build + push to gh-pages branch
+```
+
+## Contact
+
+Found a bug or have a suggestion? Email me at dante.amicarella@gmail.com

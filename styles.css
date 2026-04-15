@@ -188,7 +188,7 @@ nav a:hover::before {
 
 /* Shelf image fills its section */
 .shelf {
-    content: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1996003/basic-wood-wall-shelf-clipart-md.png");
+    content: url("images/shelf.png");
     width: 120%;
     height: auto;
     display: block;

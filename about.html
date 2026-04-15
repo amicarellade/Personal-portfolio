@@ -18,17 +18,17 @@
         /* D3 Map Styles */
         #map-container {
             position: relative;
-            background: linear-gradient(135deg, rgba(85, 107, 47, 0.08) 0%, rgba(51, 51, 51, 0.05) 100%);
-            border-radius: 20px;
+            background: #ddd7cc;
+            border-radius: 0;
             padding: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            border: 2px solid rgba(85, 107, 47, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1.5px solid #b8b2a8;
         }
 
         #map-container h2 {
             font-family: 'Space Mono', monospace;
             text-align: center;
-            color: darkolivegreen;
+            color: #3a3a3a;
             margin-bottom: 2rem;
             font-weight: 700;
             letter-spacing: 0.5px;
@@ -37,29 +37,29 @@
         #map {
             width: 100%;
             height: 600px;
-            border-radius: 12px;
+            border-radius: 0;
             overflow: hidden;
-            background: #faf8f3;
+            background: #f5f0e8;
         }
 
         .country {
-            fill: #e8e4db;
-            stroke: #c9c3b8;
-            stroke-width: 0.8;
+            fill: #e0dbd2;
+            stroke: #b8b2a8;
+            stroke-width: 0.6;
             transition: fill 0.3s ease;
         }
 
         .country:hover {
-            fill: #ddd9d0;
+            fill: #d2cdc4;
         }
 
         .travel-path {
             fill: none;
-            stroke: darkolivegreen;
-            stroke-width: 3;
+            stroke: #cc5500;
+            stroke-width: 2.5;
             stroke-linecap: round;
-            opacity: 0.75;
-            filter: drop-shadow(0 2px 4px rgba(85, 107, 47, 0.3));
+            opacity: 0.85;
+            filter: drop-shadow(0 1px 3px rgba(204, 85, 0, 0.25));
         }
 
         .location-marker {
@@ -68,28 +68,26 @@
         }
 
         .location-marker circle {
-            fill: #556b2f;
-            stroke: #333;
+            fill: #3a3a3a;
+            stroke: #cc5500;
             stroke-width: 2.5;
-            filter: drop-shadow(0 2px 6px rgba(85, 107, 47, 0.4));
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.3));
         }
 
         .location-marker:hover circle {
             r: 11;
-            fill: #333;
-            stroke: #556b2f;
-            stroke-width: 3;
+            fill: #cc5500;
+            stroke: #3a3a3a;
+            stroke-width: 2.5;
         }
 
         .location-label {
             font-family: 'Space Mono', monospace;
             font-size: 11px;
             font-weight: 700;
-            fill: #333;
+            fill: #3a3a3a;
             text-anchor: middle;
             pointer-events: none;
-            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8),
-                         0 0 8px rgba(255, 255, 255, 0.6);
             opacity: 0;
             animation: fadeInLabel 0.5s ease-out forwards;
         }
@@ -105,16 +103,16 @@
 
         .map-tooltip {
             position: absolute;
-            background: rgba(255, 255, 255, 0.98);
-            color: #333;
+            background: #faf7f2;
+            color: #3a3a3a;
             padding: 1rem 1.5rem;
-            border-radius: 12px;
+            border-radius: 10px;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
-            border: 2px solid darkolivegreen;
+            border: 1.5px solid #3a3a3a;
             font-family: 'Roboto', sans-serif;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 4px 4px 0px #3a3a3a;
             z-index: 1000;
             max-width: 300px;
         }
@@ -125,7 +123,7 @@
 
         .map-tooltip h3 {
             font-family: 'Space Mono', monospace;
-            color: darkolivegreen;
+            color: #cc5500;
             margin: 0 0 0.5rem 0;
             font-size: 1rem;
             font-weight: 700;
@@ -139,7 +137,7 @@
         }
 
         .map-tooltip p strong {
-            color: #333;
+            color: #3a3a3a;
         }
 
         .map-legend {
@@ -150,7 +148,7 @@
             margin-top: 1.5rem;
             font-family: 'Space Mono', monospace;
             font-size: 0.85rem;
-            color: #333;
+            color: #3a3a3a;
         }
 
         .legend-item {
@@ -163,17 +161,15 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #556b2f;
-            border: 2px solid #333;
-            box-shadow: 0 2px 6px rgba(85, 107, 47, 0.4);
+            background: #3a3a3a;
+            border: 2px solid #cc5500;
         }
 
         .legend-line {
             width: 30px;
-            height: 3px;
-            background: darkolivegreen;
+            height: 2.5px;
+            background: #cc5500;
             border-radius: 2px;
-            box-shadow: 0 2px 4px rgba(85, 107, 47, 0.3);
         }
 
         .map-controls {
@@ -187,26 +183,27 @@
             font-family: 'Space Mono', monospace;
             padding: 0.7rem 1.8rem;
             background: transparent;
-            border: 2px solid darkolivegreen;
-            color: darkolivegreen;
-            border-radius: 50px;
+            border: 1.5px solid #3a3a3a;
+            color: #3a3a3a;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 700;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .map-btn:hover {
-            background: darkolivegreen;
-            color: #f6eee3;
+            background: #3a3a3a;
+            color: #f5f0e8;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(85, 107, 47, 0.3);
+            box-shadow: 3px 3px 0px #cc5500;
         }
 
         .map-btn:active {
             transform: translateY(0);
+            box-shadow: none;
         }
 
         @media (max-width: 768px) {
@@ -286,12 +283,8 @@
                 </div>
                 <div class="swiper-slide"><img src="AboutImages/BFun.JPG" /></div>
                 <div class="swiper-slide"><img src="AboutImages/London.JPG" /></div>
-                <!-- <div class="swiper-slide"><img src="AboutImages/QMuseum.JPG" /></div> -->
-                <!-- <div class="swiper-slide">
-                    <img src="AboutImages/NewZealand.JPG" />
-                </div> -->
-                <!-- <div class="swiper-slide"><img src="AboutImages/River.JPG" /></div> -->
-                <!-- <div class="swiper-slide"><img src="AboutImages/Focaccia.JPG" /></div> -->
+                <div class="swiper-slide"><img src="AboutImages/ella.jpeg" /></div>
+                <div class="swiper-slide"><img src="AboutImages/skiing.jpeg" /></div>
                 <!-- <div class="swiper-slide"><img src="AboutImages/Bread.JPG" /></div> -->
             </div>
             <!-- If we need pagination -->
@@ -467,10 +460,11 @@
 
             // Draw paths between locations
             const pathGroup = svg.append("g").attr("class", "paths");
+            const arrowGroup = svg.append("g").attr("class", "arrows");
 
             for (let i = 0; i < locations.length - 1; i++) {
                 const pathData = [locations[i].coords, locations[i + 1].coords];
-                
+
                 const pathElement = pathGroup.append("path")
                     .datum(pathData)
                     .attr("class", "travel-path")
@@ -481,6 +475,19 @@
                     .attr("stroke-dashoffset", function() {
                         return this.getTotalLength();
                     });
+
+                const pathNode = pathElement.node();
+                const totalLength = pathNode.getTotalLength();
+                const endPt = pathNode.getPointAtLength(totalLength);
+                const prevPt = pathNode.getPointAtLength(Math.max(0, totalLength - 2));
+                const angle = Math.atan2(endPt.y - prevPt.y, endPt.x - prevPt.x) * 180 / Math.PI;
+
+                arrowGroup.append("polygon")
+                    .attr("class", "travel-arrow")
+                    .attr("points", "-9,-5 0,0 -9,5")
+                    .attr("fill", "#cc5500")
+                    .attr("transform", `translate(${endPt.x},${endPt.y}) rotate(${angle})`)
+                    .attr("opacity", 0);
             }
 
             // Add location markers
@@ -508,7 +515,7 @@
                     });
 
                 marker.append("circle")
-                    .attr("r", 8);
+                    .attr("r", 4);
 
                 marker.append("text")
                     .attr("class", "location-label")
@@ -534,23 +541,31 @@
             animationInProgress = true;
 
             const paths = svg.selectAll(".travel-path");
-            
-            paths.transition()
-                .duration(1500)
-                .delay((d, i) => i * 1500)
-                .attr("stroke-dashoffset", 0)
-                .on("end", function(d, i) {
-                    if (i === paths.size() - 1) {
-                        animationInProgress = false;
-                    }
-                });
+            const arrows = svg.selectAll(".travel-arrow");
+            const total = paths.size();
+
+            paths.each(function(d, i) {
+                d3.select(this).transition()
+                    .duration(1500)
+                    .delay(i * 1500)
+                    .attr("stroke-dashoffset", 0)
+                    .on("end", function() {
+                        arrows.filter((d, j) => j === i)
+                            .transition()
+                            .duration(200)
+                            .attr("opacity", 1);
+                        if (i === total - 1) {
+                            animationInProgress = false;
+                        }
+                    });
+            });
         }
 
         function resetMap() {
-            const paths = svg.selectAll(".travel-path");
-            paths.attr("stroke-dashoffset", function() {
+            svg.selectAll(".travel-path").attr("stroke-dashoffset", function() {
                 return this.getTotalLength();
             });
+            svg.selectAll(".travel-arrow").attr("opacity", 0);
             animationInProgress = false;
         }
 
