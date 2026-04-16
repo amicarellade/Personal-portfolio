@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dante Amicarella - Chess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chess.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html"><img src="images/logo.png" alt="logo" class="logo" /></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mailto:dante.amicarella@gmail.com" class="Contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="chess-wrapper">
+        <h1>Chess Stats</h1>
+        <p class="chess-subtitle">
+            Live data from
+            <a href="https://www.chess.com/member/think_later_dance_now" target="_blank" rel="noopener noreferrer">
+                think_later_dance_now
+            </a>
+            on Chess.com
+        </p>
+
+        <div id="chess-content">
+            <p class="loading">Loading stats...</p>
+        </div>
+        <div id="openings-section"></div>
+    </main>
+
+    <footer class="social-icons" role="contentinfo">
+        <a href="https://twitter.com/datamicarella" target="_blank" rel="noopener noreferrer">
+            <img src="images/twitter-icon.png" alt="Twitter">
+        </a>
+        <a href="https://www.instagram.com/danteamicarella/" target="_blank" rel="noopener noreferrer">
+            <img src="images/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://github.com/amicarellade" target="_blank" rel="noopener noreferrer">
+            <img src="images/github-icon.png" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/dante-amicarella/" target="_blank" rel="noopener noreferrer">
+            <img src="images/linkedin-icon.png" alt="LinkedIn">
+        </a>
+    </footer>
+
+    <script>
+        const USERNAME = 'think_later_dance_now';
+        const COLORS = { win: '#3a3a3a', loss: '#cc5500', draw: '#b8b2a8' };
+
+        async function loadStats() {
+            const content = document.getElementById('chess-content');
+            try {
+                const [statsRes, archivesRes] = await Promise.all([
+                    fetch(`https://api.chess.com/pub/player/${USERNAME}/stats`),
+                    fetch(`https://api.chess.com/pub/player/${USERNAME}/games/archives`)
+                ]);
+                if (!statsRes.ok || !archivesRes.ok) throw new Error('Failed to fetch');
+                const [stats, archivesData] = await Promise.all([statsRes.json(), archivesRes.json()]);
+
+                // Fetch all monthly archives in parallel
+                const archiveResponses = await Promise.all(
+                    archivesData.archives.map(url => fetch(url).then(r => r.json()))
+                );
+                const allGames = archiveResponses.flatMap(a => a.games ?? []);
+                const openings = extractOpenings(allGames);
+
+                render(stats, openings);
+            } catch (e) {
+                content.innerHTML = `<p class="error-msg">Could not load Chess.com stats. Try again later.</p>`;
+            }
+        }
+
+        function extractOpenings(games) {
+            const white = {}, black = {};
+
+            for (const game of games) {
+                const ecoUrl = game.eco;
+                if (!ecoUrl) continue;
+
+                // Parse opening name from ECO URL slug
+                // e.g. "https://www.chess.com/openings/Scotch-Game-Schmidt-Variation" -> "Scotch Game: Schmidt Variation"
+                const slug = ecoUrl.split('/').pop();
+                const name = slug
+                    .replace(/-/g, ' ')
+                    .replace(/(\w+) (\d+)/, '$1-$2') // keep move numbers like "e4 e5" intact
+                    .replace(/\b\w/g, c => c.toUpperCase());
+
+                const isWhite = game.white?.username?.toLowerCase() === USERNAME.toLowerCase();
+                const bucket = isWhite ? white : black;
+                bucket[name] = (bucket[name] ?? 0) + 1;
+            }
+
+            const top5 = obj => Object.entries(obj)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5)
+                .map(([name, count]) => ({ name, count }));
+
+            return { white: top5(white), black: top5(black) };
+        }
+
+        function render(data, openings) {
+            const formats = [
+                { key: 'chess_blitz',  label: 'Blitz',  icon: '⚡' },
+                { key: 'chess_rapid',  label: 'Rapid',  icon: '⏱' },
+                { key: 'chess_bullet', label: 'Bullet', icon: '🔫' },
+            ].filter(f => data[f.key]);
+
+            const content = document.getElementById('chess-content');
+            content.innerHTML = `
+                <!-- Rating Cards -->
+                <div class="rating-cards">
+                    ${formats.map(f => {
+                        const d = data[f.key];
+                        return `
+                        <div class="rating-card">
+                            <div class="format">${f.icon} ${f.label}</div>
+                            <div class="current-rating">${d.last.rating}</div>
+                            <div class="best-rating">Best: <span>${d.best.rating}</span></div>
+                        </div>`;
+                    }).join('')}
+                </div>
+
+                <!-- Win/Loss/Draw Charts -->
+                <div class="charts-section">
+                    <h2>Win / Loss / Draw</h2>
+                    <div class="charts-grid">
+                        ${formats.map(f => `
+                        <div class="chart-card">
+                            <h3>${f.label}</h3>
+                            <svg id="chart-${f.key}" width="180" height="180"></svg>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <div class="legend-swatch" style="background:${COLORS.win}"></div>
+                                    <span>W ${data[f.key].record.win}</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-swatch" style="background:${COLORS.loss}"></div>
+                                    <span>L ${data[f.key].record.loss}</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-swatch" style="background:${COLORS.draw}"></div>
+                                    <span>D ${data[f.key].record.draw}</span>
+                                </div>
+                            </div>
+                        </div>`).join('')}
+                    </div>
+                </div>
+
+                <!-- Tactics & League -->
+                <div class="extras-section">
+                    <h2>More</h2>
+                    ${data.tactics?.highest ? `
+                    <div class="extra-card">
+                        <div class="label">Tactics Rating</div>
+                        <div class="value">${data.tactics.highest.rating}</div>
+                        <div class="sublabel">highest</div>
+                    </div>` : ''}
+                    ${(() => {
+                        const total = formats.reduce((acc, f) => {
+                            const r = data[f.key].record;
+                            return { win: acc.win + r.win, loss: acc.loss + r.loss, draw: acc.draw + r.draw };
+                        }, { win: 0, loss: 0, draw: 0 });
+                        const games = total.win + total.loss + total.draw;
+                        const pct = games > 0 ? Math.round((total.win / games) * 100) : 0;
+                        return `
+                        <div class="extra-card">
+                            <div class="label">Total Games</div>
+                            <div class="value">${games}</div>
+                            <div class="sublabel">${pct}% win rate</div>
+                        </div>`;
+                    })()}
+                </div>
+            `;
+
+            // Draw donut charts
+            formats.forEach(f => drawDonut(`chart-${f.key}`, data[f.key].record));
+
+            // Openings section
+            const openingsEl = document.getElementById('openings-section');
+            openingsEl.innerHTML = `
+                <div class="charts-section">
+                    <h2>Top Openings</h2>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>As White</h3>
+                            <svg id="bar-white"></svg>
+                        </div>
+                        <div class="chart-card">
+                            <h3>As Black</h3>
+                            <svg id="bar-black"></svg>
+                        </div>
+                    </div>
+                </div>
+            `;
+            drawBarChart('bar-white', openings.white, '#3a3a3a', '#ffffff');
+            drawBarChart('bar-black', openings.black, '#cc5500', '#ffffff');
+        }
+
+        function drawDonut(id, record) {
+            const { win, loss, draw } = record;
+            const total = win + loss + draw;
+            if (total === 0) return;
+
+            const size = 180;
+            const radius = size / 2;
+            const inner = radius * 0.55;
+
+            const pieData = [
+                { label: 'win',  value: win },
+                { label: 'loss', value: loss },
+                { label: 'draw', value: draw },
+            ].filter(d => d.value > 0);
+
+            const svg = d3.select(`#${id}`)
+                .attr('viewBox', `0 0 ${size} ${size}`);
+
+            const arc = d3.arc().innerRadius(inner).outerRadius(radius - 4);
+            const pie = d3.pie().value(d => d.value).sort(null);
+
+            const g = svg.append('g').attr('transform', `translate(${radius},${radius})`);
+
+            g.selectAll('path')
+                .data(pie(pieData))
+                .join('path')
+                .attr('d', arc)
+                .attr('fill', d => COLORS[d.data.label])
+                .attr('stroke', '#ddd7cc')
+                .attr('stroke-width', 2);
+
+            // Center label: win %
+            const pct = Math.round((win / total) * 100);
+            g.append('text')
+                .attr('text-anchor', 'middle')
+                .attr('dy', '-0.2em')
+                .attr('font-family', "'Space Mono', monospace")
+                .attr('font-size', '1.4rem')
+                .attr('font-weight', '700')
+                .attr('fill', '#3a3a3a')
+                .text(`${pct}%`);
+
+            g.append('text')
+                .attr('text-anchor', 'middle')
+                .attr('dy', '1.2em')
+                .attr('font-family', "'Space Mono', monospace")
+                .attr('font-size', '0.65rem')
+                .attr('fill', '#777')
+                .text('win rate');
+        }
+
+        function drawBarChart(id, data, barColor, textColor) {
+            if (!data.length) return;
+
+            const margin = { top: 4, right: 48, bottom: 4, left: 0 };
+            const rowHeight = 38;
+            const cardWidth = document.querySelector(`#${id}`).closest('.chart-card').clientWidth - 32;
+            const width = cardWidth - margin.left - margin.right;
+            const height = data.length * rowHeight;
+
+            const svg = d3.select(`#${id}`)
+                .attr('width', cardWidth)
+                .attr('height', height + margin.top + margin.bottom);
+
+            const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const maxCount = d3.max(data, d => d.count);
+            const x = d3.scaleLinear().domain([0, maxCount]).range([0, width]);
+            const y = d3.scaleBand().domain(data.map(d => d.name)).range([0, height]).padding(0.2);
+
+            const barH = y.bandwidth();
+
+            // Background track
+            g.selectAll('.bar-track')
+                .data(data)
+                .join('rect')
+                .attr('class', 'bar-track')
+                .attr('x', 0)
+                .attr('y', d => y(d.name))
+                .attr('width', width)
+                .attr('height', barH)
+                .attr('fill', 'rgba(0,0,0,0.08)')
+                .attr('rx', 3);
+
+            // Animated bar
+            g.selectAll('.bar-fill')
+                .data(data)
+                .join('rect')
+                .attr('class', 'bar-fill')
+                .attr('x', 0)
+                .attr('y', d => y(d.name))
+                .attr('height', barH)
+                .attr('width', 0)
+                .attr('fill', barColor)
+                .attr('rx', 3)
+                .transition().duration(700).delay((d, i) => i * 100)
+                .attr('width', d => x(d.count));
+
+            // Opening name inside bar — truncate to fit after animation completes
+            data.forEach((d, i) => {
+                const barWidth = x(d.count);
+                const padding = 16; // 8px each side
+                const maxTextWidth = barWidth - padding;
+
+                const textEl = g.append('text')
+                    .attr('x', 8)
+                    .attr('y', y(d.name) + barH / 2)
+                    .attr('dy', '0.35em')
+                    .attr('font-family', "'Space Mono', monospace")
+                    .attr('font-size', '0.68rem')
+                    .attr('font-weight', '700')
+                    .attr('fill', textColor)
+                    .attr('opacity', 0)
+                    .text(d.name);
+
+                // After bar animation finishes, trim text to fit then fade in
+                setTimeout(() => {
+                    const node = textEl.node();
+                    let label = d.name;
+                    node.textContent = label;
+                    while (node.getComputedTextLength() > maxTextWidth && label.length > 0) {
+                        label = label.slice(0, -1);
+                        node.textContent = label.trimEnd() + '…';
+                    }
+                    if (maxTextWidth <= 0) node.textContent = '';
+                    textEl.transition().duration(200).attr('opacity', 1);
+                }, i * 100 + 700);
+            });
+
+            // Count label to the right of the bar
+            g.selectAll('.bar-count')
+                .data(data)
+                .join('text')
+                .attr('class', 'bar-count')
+                .attr('x', d => x(d.count) + 6)
+                .attr('y', d => y(d.name) + barH / 2)
+                .attr('dy', '0.35em')
+                .attr('font-family', "'Space Mono', monospace")
+                .attr('font-size', '0.72rem')
+                .attr('font-weight', '700')
+                .attr('fill', '#3a3a3a')
+                .attr('opacity', 0)
+                .text(d => d.count)
+                .transition().duration(300).delay((d, i) => i * 100 + 500)
+                .attr('opacity', 1);
+        }
+
+        loadStats();
+    </script>
+</body>
+</html>

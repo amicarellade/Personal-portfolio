@@ -1,0 +1,224 @@
+/* =============================================
+   CHESS PAGE STYLES
+   ============================================= */
+
+.chess-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.chess-wrapper h1 {
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text);
+}
+
+.chess-subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-xl);
+    font-family: 'Space Mono', monospace;
+}
+
+.chess-subtitle a {
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
+    transition: opacity var(--transition-fast);
+}
+
+.chess-subtitle a:hover {
+    opacity: 0.7;
+}
+
+/* ── Rating Cards ── */
+.rating-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.rating-card {
+    background: #ddd7cc;
+    border: 1.5px solid #b8b2a8;
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.rating-card .format {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #777;
+    margin-bottom: var(--spacing-xs);
+}
+
+.rating-card .current-rating {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.rating-card .best-rating {
+    font-size: 0.85rem;
+    color: #cc5500;
+    font-family: 'Space Mono', monospace;
+}
+
+.rating-card .best-rating span {
+    font-weight: 700;
+}
+
+/* ── Record Charts ── */
+.charts-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.charts-section h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #777;
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1.5px solid #b8b2a8;
+    padding-bottom: var(--spacing-xs);
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.chart-card {
+    background: #ddd7cc;
+    border: 1.5px solid #b8b2a8;
+    padding: var(--spacing-md);
+}
+
+.chart-card h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--color-text);
+}
+
+.chart-card svg {
+    display: block;
+    margin: 0 auto;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ── Tactics & League ── */
+.extras-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.extras-section h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #777;
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+    border-bottom: 1.5px solid #b8b2a8;
+    padding-bottom: var(--spacing-xs);
+}
+
+.extra-card {
+    background: #ddd7cc;
+    border: 1.5px solid #b8b2a8;
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.extra-card .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #777;
+    margin-bottom: var(--spacing-xs);
+}
+
+.extra-card .value {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.extra-card .sublabel {
+    font-size: 0.8rem;
+    color: #cc5500;
+    font-family: 'Space Mono', monospace;
+    margin-top: 0.25rem;
+}
+
+/* ── Loading & Error states ── */
+.loading {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    color: #777;
+    padding: var(--spacing-xl);
+    font-size: 0.9rem;
+}
+
+.error-msg {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    color: #cc5500;
+    padding: var(--spacing-xl);
+    font-size: 0.9rem;
+    border: 1.5px solid #cc5500;
+    background: #ddd7cc;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+    .chess-wrapper {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .chart-legend {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-xs);
+    }
+}
