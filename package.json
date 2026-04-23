@@ -20,6 +20,8 @@
   "author": "Dante Amicarella",
   "license": "MIT",
   "devDependencies": {
+    "@supabase/supabase-js": "^2.104.1",
+    "dotenv": "^17.4.2",
     "gh-pages": "^6.3.0",
     "prettier": "^3.8.0",
     "terser": "^5.46.0",

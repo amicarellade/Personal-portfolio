@@ -188,7 +188,7 @@ nav a:hover::before {
 
 /* Shelf image fills its section */
 .shelf {
-    content: url("images/shelf.png");
+    content: url("../../images/shelf.png");
     width: 120%;
     height: auto;
     display: block;

@@ -21,6 +21,7 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 about: resolve(__dirname, 'about.html'),
+                chess: resolve(__dirname, 'chess.html'),
                 library: resolve(__dirname, 'library.html'),
                 golf: resolve(__dirname, 'golf.html'),
                 projects: resolve(__dirname, 'projects.html'),

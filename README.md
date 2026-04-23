@@ -30,17 +30,25 @@ A personal portfolio website built with vanilla HTML, CSS, and JavaScript. Featu
 ```
 ├── index.html          # Landing page
 ├── about.html          # About page
-├── projects.html       # Projects page
+├── chess.html          # Chess stats page
 ├── golf.html           # Golf calculator
 ├── library.html        # Library page
+├── projects.html       # Projects page
 ├── resume.html         # Resume page
-├── styles.css          # Shared styles (index, about, resume)
-├── about.css           # (legacy) about page styles
-├── golf.css            # Golf page styles
-├── library.css         # Library page styles
-├── script.js           # Strokes-gained calculator logic
+├── src/
+│   ├── styles/         # All CSS files
+│   │   ├── styles.css  # Shared styles
+│   │   ├── about.css
+│   │   ├── chess.css
+│   │   ├── golf.css
+│   │   ├── library.css
+│   │   └── resume.css
+│   └── scripts/
+│       └── script.js   # Strokes-gained calculator logic
+├── scripts/
+│   └── add-book.js     # CLI tool to add books to Supabase
 ├── images/             # Logos, icons, shelf image
-├── AboutImages/        # Photo gallery images
+│   └── about/          # Photo gallery images
 ├── vite.config.js      # Vite multi-page build config
 └── package.json
 ```
@@ -58,6 +66,14 @@ npm run dev       # starts dev server at localhost:3000
 npm run build     # outputs to /dist
 npm run preview   # preview the production build at localhost:4173
 npm run deploy    # build + push to gh-pages branch
+
+## Adding a book to the library
+
+```bash
+node scripts/add-book.js
+```
+
+Requires a `.env` file at the project root with `SUPABASE_SERVICE_KEY` set.
 ```
 
 ## Contact
