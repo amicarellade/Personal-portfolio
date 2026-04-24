@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="src/styles/styles.css" />
     <link rel="stylesheet" href="src/styles/golf.css" />
     <title>Dante Amicarella - Strokes Gained</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 
@@ -27,7 +27,7 @@
     </header>
 
     <div class="container">
-        <h1>Golf Strokes Gained Calculator</h1>
+        <h1 class="golf-page-title">Golf Strokes Gained Calculator</h1>
         <p class="caption">
             Strokes Gained is a statistical measure used in golf to quantify a player's performance in various aspects of the game relative to the field average. It shows how many strokes a player gains or loses in categories like off-the-tee, approach-the-green, around-the-green, and putting.
         </p>
@@ -59,8 +59,10 @@
                 </button>
             </div>
         </div>
-        <button class="btn btn-primary" id="addHoleButton">Add Hole</button>
-        <button class="btn btn-success" id="calculateButton">Calculate Strokes Gained</button>
+        <div class="action-buttons">
+            <button class="btn" id="addHoleButton">+ Add Hole</button>
+            <button class="btn" id="calculateButton">Calculate Strokes Gained</button>
+        </div>
         <div id="result"></div>
         <b><div id="chart"></div></b>
         <div class="categories">

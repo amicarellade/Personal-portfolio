@@ -410,7 +410,7 @@
         // Map setup
         const mapContainer = document.getElementById('map-container');
         const width = mapContainer.offsetWidth - 64;
-        const height = 600;
+        const height = window.innerWidth < 600 ? 340 : 600;
 
         const svg = d3.select("#map")
             .attr("viewBox", [0, 0, width, height])
@@ -418,9 +418,10 @@
             .attr("height", height);
 
         // Use geoMercator to show both US and Mexico
+        const isMobile = window.innerWidth < 600;
         const projection = d3.geoMercator()
-            .center([-95, 37])
-            .scale(width * 0.7)  // Reduced from 1.1 to 0.7 for more zoom out
+            .center(isMobile ? [-97, 38] : [-95, 37])
+            .scale(isMobile ? Math.max(width * 1.1, 300) : width * 0.7)
             .translate([width / 2, height / 2]);
 
         const path = d3.geoPath().projection(projection);
@@ -575,8 +576,12 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 const newWidth = mapContainer.offsetWidth - 64;
+                const mobile = window.innerWidth < 600;
                 svg.attr("width", newWidth);
-                projection.center([-95, 37]).scale(newWidth * 0.7).translate([newWidth / 2, height / 2]);
+                projection
+                    .center(mobile ? [-97, 38] : [-95, 37])
+                    .scale(mobile ? Math.max(newWidth * 1.1, 300) : newWidth * 0.7)
+                    .translate([newWidth / 2, height / 2]);
                 
                 svg.selectAll("path").attr("d", path);
                 

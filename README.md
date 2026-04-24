@@ -78,4 +78,4 @@ Requires a `.env` file at the project root with `SUPABASE_SERVICE_KEY` set.
 
 ## Contact
 
-Found a bug or have a suggestion? Email me at dante.amicarella@gmail.com
+Found a bug or have a suggestion? Email me at amicarella.datascience@gmail.com
